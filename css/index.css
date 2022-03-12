@@ -222,17 +222,24 @@ blockquote {;
 #main {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 3px;
+    margin-top: 110px;
     margin-bottom: 3px;
     text-align: center;
     display: flex;
     justify-content: center;
+    width: 600px;
+    z-index: 0;
+    background: #ffffff;
 }
 
 #content {
-    position: absolute;
-    top: 110px;
-    left: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 110px;
+    margin-bottom: 3px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
     width: 1000px;
     z-index: 0;
     background: #ffffff;
