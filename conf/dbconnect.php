@@ -1,7 +1,9 @@
 <?php
-$id_con = mysql_connect("localhost", "polinarv_1", "Password1!")
+$id_con = mysqli_connect("localhost", "polinarv_1", "Password1!")
 or die("Невозможно соединиться с сервером");
-mysql_select_db("polinarv_1") or die("Невозможно выбрать БД");
-mysql_query("set names cp1251");
-mysql_query("set character_set_server=cp1251");
+mysqli_select_db($id_con,"polinarv_1") or die("Невозможно выбрать БД");
+mysqli_query($id_con,"set names cp1251");
+mysqli_query($id_con,"set character_set_server=cp1251");
+
+define('CONNECTION', $id_con)
 ?>

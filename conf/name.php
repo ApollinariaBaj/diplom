@@ -4,8 +4,8 @@ session_start();
 <table> 
 <tr> <td width="60%"> <h2> <?php 
 require "conf/dbconnect.php";
-$namec=mysql_query("select namec from contact where namec!='0' limit 1");
-while($sod_mas1=mysql_fetch_row($namec))
+$namec=mysqli_query(CONNECTION, "select namec from contact where namec!='0' limit 1");
+while($sod_mas1=mysqli_fetch_row($namec))
 {
 $title=$sod_mas1[0];
 echo $title;
@@ -16,8 +16,8 @@ echo $title;
 
  <?php 
 require "conf/dbconnect.php";
-$res=mysql_query("select  `name`, surname, stud from sotr   where idsotr='{$_SESSION['sotr']}' ");
-while($res_mas=mysql_fetch_row($res))
+$res=mysqli_query("select  `name`, surname, stud from sotr   where idsotr='{$_SESSION['sotr']}' ");
+while($res_mas=mysqli_fetch_row($res))
 {
 echo "$res_mas[0] <br>  $res_mas[1] <br> ";
 if ($res_mas[2]=1)
