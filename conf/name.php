@@ -16,7 +16,7 @@ echo $title;
 
  <?php 
 require "conf/dbconnect.php";
-$res=mysqli_query("select  `name`, surname, stud from sotr   where idsotr='{$_SESSION['sotr']}' ");
+$res=mysqli_query(CONNECTION, "select  `name`, surname, stud from sotr   where idsotr='{$_SESSION['sotr']}' ");
 while($res_mas=mysqli_fetch_row($res))
 {
 echo "$res_mas[0] <br>  $res_mas[1] <br> ";

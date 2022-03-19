@@ -8,14 +8,14 @@
 
     <title>Необходима авторизация</title>
 
-    <link rel="stylesheet" type="text/css" href="../js/jquery-ui-1.7.2.custom.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel='stylesheet' type='text/css' href='../css/index.css'/>
-    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript" src="../js/jquery-ui-1.7.2.custom.min.js"></script>
-    <script type="text/javascript" src="../js/ui.datepicker-uk.js"></script>
-    <script type="text/javascript" src="../js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="../js/forma.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/jquery-ui-1.7.2.custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel='stylesheet' type='text/css' href='/css/index.css'/>
+    <script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.7.2.custom.min.js"></script>
+    <script type="text/javascript" src="/js/ui.datepicker-ru.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js/forma.js"></script>
 </head>
 <body>
 <div id='main'>
@@ -28,7 +28,7 @@
                         <h2>
                             <?php
                             require "../conf/dbconnect.php";
-                            $namec = mysqli_query(CONNECTION, "select namec from contact where namec!='0' limit 1");
+                            $namec = mysqli_query(CONNECTION, "select login from user where login!='0' limit 1");
                             while ($sod_mas1 = mysqli_fetch_row($namec)) {
                                 $title = $sod_mas1[0];
                                 echo $title;

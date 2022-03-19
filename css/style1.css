@@ -1,0 +1,219 @@
+* {margin:0; padding:0}
+
+p {font:16px/1.5 Verdana, Arial, Helvetica, sans-serif; color:#505050;
+padding: 5px 5px 5px 5px; 
+text-align: center;
+}
+.reg{font:18px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+padding: 6px 6px 6px 6px; 
+  color:#ff2400;
+}
+.date{font:14px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+padding: 2px 2px 2px 2px; 
+  color:#d0f0c0;
+background-color:#7b917b;
+}
+.date1{font:12px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+padding: 2px 2px 2px 2px; 
+  color:#d0f0c0;
+background-color:#7b917b;
+text-align: center;
+text-shadow: 0px 0px 1px #fff0f5;
+}
+
+
+.log{font:13px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+padding: 6px 6px 6px 6px; 
+  color:#ff2400;
+background-color:#c7fcec;
+}
+
+.log1{font:13px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+padding: 3px 3px 3px 3px; 
+background-color:#c7fcec;
+width: 520px;
+
+}
+
+.table3{
+	font: 14px/1.5 Verdana, Arial, Helvetica, sans-serif;
+	color: #e6e6fa;
+	padding: 2px 2px 2px 2px; 
+	background-color: #ff0033;
+	text-align: center;
+}
+
+.pp {font:16px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+padding: 4px 4px 4px 4px; 
+background-color:#efd334;
+  color:#505050;
+  text-shadow: 0px 0px 3px #fff0f5;
+text-align: center;
+}
+
+.but {
+	max-width: 150px;
+	background-color:#efd334;
+  color:#505050;
+  text-shadow: 0px 0px 3px #fff0f5;
+  margin: 4px;
+	}
+	
+		.but2 {
+		max-width: 25px;
+	background-color:#c0c0c0;
+  color:#505050;
+  text-shadow: 0px 0px 3px #FFFFFF;
+  margin: 5px;
+  font: 20px;
+	}
+	
+	.but1 {
+	max-width: 500px;
+	background-color:#c0c0c0;
+  color:#505050;
+  text-shadow: 0px 0px 3px #FFFFFF;
+  margin: 2px;
+	}
+
+.prav{
+  font:18px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+padding: 4px 4px 4px 4px; 
+background-color:#d5d5d5;
+  color:#505050;
+text-align: center;
+
+}
+
+.kvit{
+  color:#8a3324;
+padding: 2px 2px 2px 2px;
+text-align: center; 
+font:14px;
+}
+
+.tarivname{
+font:14px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+  color:#f5f5dc;
+padding: 1px 1px 1px 1px; 
+fond-weight:bold;
+}
+.tarivnew{
+font:14px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+  color:#131009;
+padding: 5px 5px 5px 5px; 
+background-color:#ace1af;
+}
+.tarivold{
+font:14px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+  color:#131009;
+padding: 5px 5px 5px 5px; 
+background-color:#fadfad;
+}
+.table{
+	font: 14px/1.5 Georgia;
+	color: #1c1d1d;
+	padding: 5px;
+	text-align: justify;
+}
+
+.loginsite{
+font:12px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+  color:#131413;
+padding: 1px 1px 1px 1px; 
+background-color:#cadaba;
+text-align: left;
+text-shadow: text-shadow: 0px 0px 3px #fff0f5;
+z-index: 100;
+margin-left: 12px;
+width:200px;
+position: left;
+}
+
+.table1{
+font:14px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+  color:#808080;
+padding: 2px 2px 2px 2px; 
+background-color:#f5f5dc;
+}
+
+
+.tr{
+font:12px/1.5 Verdana, Arial, Helvetica, sans-serif; 
+  color:#131312;
+padding: 3px 3px 3px 3px; 
+background-color:#f5f5dc;
+text-align: justify;
+}
+.tz{
+  color:#442d25;
+padding: 3px 3px 3px 3px; 
+background-color:#f5f5dc;
+text-align: center;
+}
+
+.zz{
+  color:#003153;
+padding: 5px 5px 5px 5px; 
+background-color:#e75480;
+}
+
+
+.zag2{
+	font: bold 11px/1.5 Verdana, Arial, Helvetica, sans-serif;
+	color: #d5d5d5;
+	padding: 1px 1px 1px 1px;
+	background-color: #2a52be;
+	text-align: center;
+}
+
+.zag3{
+	font: bold 15px/1.5 Verdana, Arial, Helvetica, sans-serif;
+	color: #99958c;
+	padding: 2px 2px 2px 2px;
+	text-align: left;
+}
+
+.line {
+
+    background:url(../image/line_horz.gif) top left repeat-x; height:1px; width:900px;
+
+    }
+    
+
+
+.text-left {
+	
+float:left; width:300px;
+  color:#8a3324;
+padding: 2px 2px 2px 2px;
+text-align: center; 
+font:14px;
+}
+
+.text-left1 {
+	
+float:left; width:300px;
+	color: #99958c;
+padding: 2px 2px 2px 2px;
+text-align: center; 
+font: bold 12px Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+.text-right {
+	float:left; width:600px;
+	background-color:#c7fcec;
+	padding: 2px 2px 2px 2px;
+	text-align: center; 
+	
+}
+
+.text-right1 {
+	float:left; width:600px;
+	background-color:#bbbbbb;
+	padding: 2px 2px 2px 2px;
+	text-align: center; 
+	text-shadow: 0px 0px 3px #FFFFFF;
+	
+}
+    
