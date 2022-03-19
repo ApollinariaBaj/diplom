@@ -5117,28 +5117,28 @@ jQuery.extend({
 		try {
 			// Set the correct header, if data is being sent
 			if ( s.data || origSettings && origSettings.contentType ) {
-				xhr.setRequestHeader("Content-Type", s.contentType);
+				xhr.setRequestheader("Content-Type", s.contentType);
 			}
 
 			// Set the If-Modified-Since and/or If-None-Match header, if in ifModified mode.
 			if ( s.ifModified ) {
 				if ( jQuery.lastModified[s.url] ) {
-					xhr.setRequestHeader("If-Modified-Since", jQuery.lastModified[s.url]);
+					xhr.setRequestheader("If-Modified-Since", jQuery.lastModified[s.url]);
 				}
 
 				if ( jQuery.etag[s.url] ) {
-					xhr.setRequestHeader("If-None-Match", jQuery.etag[s.url]);
+					xhr.setRequestheader("If-None-Match", jQuery.etag[s.url]);
 				}
 			}
 
 			// Set header so the called script knows that it's an XMLHttpRequest
 			// Only send the header if it's not a remote XHR
 			if ( !remote ) {
-				xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+				xhr.setRequestheader("X-Requested-With", "XMLHttpRequest");
 			}
 
 			// Set the Accepts header for the server, depending on the dataType
-			xhr.setRequestHeader("Accept", s.dataType && s.accepts[ s.dataType ] ?
+			xhr.setRequestheader("Accept", s.dataType && s.accepts[ s.dataType ] ?
 				s.accepts[ s.dataType ] + ", */*" :
 				s.accepts._default );
 		} catch(e) {}
@@ -5328,8 +5328,8 @@ jQuery.extend({
 
 	// Determines if an XMLHttpRequest returns NotModified
 	httpNotModified: function( xhr, url ) {
-		var lastModified = xhr.getResponseHeader("Last-Modified"),
-			etag = xhr.getResponseHeader("Etag");
+		var lastModified = xhr.getResponseheader("Last-Modified"),
+			etag = xhr.getResponseheader("Etag");
 
 		if ( lastModified ) {
 			jQuery.lastModified[url] = lastModified;
@@ -5344,7 +5344,7 @@ jQuery.extend({
 	},
 
 	httpData: function( xhr, type, s ) {
-		var ct = xhr.getResponseHeader("content-type") || "",
+		var ct = xhr.getResponseheader("content-type") || "",
 			xml = type === "xml" || !type && ct.indexOf("xml") >= 0,
 			data = xml ? xhr.responseXML : xhr.responseText;
 

@@ -55,7 +55,7 @@ $.fn.jqGrid = function( p ) {
 	loadBeforeSend: null,
 	afterInsertRow: null,
 	beforeRequest: null,
-	onHeaderClick: null,
+	onheaderClick: null,
 	viewrecords: false,
 	loadonce: false,
 	multiselect: false,
@@ -678,7 +678,7 @@ $.fn.jqGrid = function( p ) {
 		loadBeforeSend = $.isFunction(this.p.loadBeforeSend) ? this.p.loadBeforeSend : false,
 		onRightClickRow = $.isFunction(this.p.onRightClickRow) ? this.p.onRightClickRow : false,
 		afterInsRow = $.isFunction(this.p.afterInsertRow) ? this.p.afterInsertRow : false,
-		onHdCl = $.isFunction(this.p.onHeaderClick) ? this.p.onHeaderClick : false,
+		onHdCl = $.isFunction(this.p.onheaderClick) ? this.p.onheaderClick : false,
 		beReq = $.isFunction(this.p.beforeRequest) ? this.p.beforeRequest : false,
 		onSC = $.isFunction(this.p.onCellSelect) ? this.p.onCellSelect : false,
 		sortkeys = ["shiftKey","altKey","ctrlKey"];
@@ -1505,8 +1505,8 @@ $.fn.jqGrid = function( p ) {
 		}
 		if(hg) {$(grid.bDiv).hide();}
 		grid.cDiv = document.createElement("div");
-		$(grid.cDiv).append("<table class='Header' cellspacing='0' cellpadding='0' border='0'><tr><td class='HeaderLeft'><img src='"+ts.p.imgpath+"spacer.gif' border='0' /></td><th>"+ts.p.caption+"</th>"+ ((ts.p.hidegrid===true) ? "<td class='HeaderButton'><img src='"+ts.p.imgpath+"up.gif' border='0'/></td>" :"") +"<td class='HeaderRight'><img src='"+ts.p.imgpath+"spacer.gif' border='0' /></td></tr></table>")
-		.addClass("GridHeader").width(grid.width);
+		$(grid.cDiv).append("<table class='header' cellspacing='0' cellpadding='0' border='0'><tr><td class='headerLeft'><img src='"+ts.p.imgpath+"spacer.gif' border='0' /></td><th>"+ts.p.caption+"</th>"+ ((ts.p.hidegrid===true) ? "<td class='headerButton'><img src='"+ts.p.imgpath+"up.gif' border='0'/></td>" :"") +"<td class='headerRight'><img src='"+ts.p.imgpath+"spacer.gif' border='0' /></td></tr></table>")
+		.addClass("Gridheader").width(grid.width);
 		$(grid.cDiv).insertBefore(grid.hDiv);
 		if( ts.p.toolbar[0] ) {
 			grid.uDiv = document.createElement("div");
@@ -1520,14 +1520,14 @@ $.fn.jqGrid = function( p ) {
 			ts.p._height += parseInt($(grid.cDiv,ts).height(),10);
 			var tdt = ts.p.datatype;
 			if(ts.p.hidegrid===true) {
-				$(".HeaderButton",grid.cDiv).toggle( function(){
+				$(".headerButton",grid.cDiv).toggle( function(){
 					if(ts.p.pager) {$(ts.p.pager).slideUp();}
 					if(ts.p.toolbar[0]) {$(grid.uDiv,ts).slideUp();}
 					$(grid.bDiv).hide();
 					$(grid.hDiv).slideUp();
 					$("img",this).attr("src",ts.p.imgpath+"down.gif");
 					ts.p.gridstate = 'hidden';
-					if(onHdCl) {if(!hg) {ts.p.onHeaderClick(ts.p.gridstate);}}
+					if(onHdCl) {if(!hg) {ts.p.onheaderClick(ts.p.gridstate);}}
 					},
 					function() {
 					$(grid.hDiv).slideDown();
@@ -1537,10 +1537,10 @@ $.fn.jqGrid = function( p ) {
 					$("img",this).attr("src",ts.p.imgpath+"up.gif");
 					if(hg) {ts.p.datatype = tdt;populate();hg=false;}
 					ts.p.gridstate = 'visible';
-					if(onHdCl) {ts.p.onHeaderClick(ts.p.gridstate)}
+					if(onHdCl) {ts.p.onheaderClick(ts.p.gridstate)}
 					}
 				);
-				if(hg) { $(".HeaderButton",grid.cDiv).trigger("click"); ts.p.datatype="local";}
+				if(hg) { $(".headerButton",grid.cDiv).trigger("click"); ts.p.datatype="local";}
 			}
 		} else {$(grid.cDiv).hide();}
 		ts.p._height += parseInt($(grid.hDiv,ts).height(),10);

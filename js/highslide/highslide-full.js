@@ -2,7 +2,7 @@
 Name:    Highslide JS
 Version: 4.1.4 (April 17 2009)
 Config:  default +events +unobtrusive +imagemap +slideshow +positioning +transitions +viewport +thumbstrip +inline +ajax +iframe +flash
-Author:  Torstein Hønsi
+Author:  Torstein Hï¿½nsi
 Support: http://highslide.com/support
 
 Licence:
@@ -2961,7 +2961,7 @@ run : function () {
 		}
 	};
 	this.xmlHttp.open('POST', this.src, true);
-	this.xmlHttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	this.xmlHttp.setRequestheader('X-Requested-With', 'XMLHttpRequest');
 	this.xmlHttp.send('dummy=1');
 },
 

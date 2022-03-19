@@ -2629,15 +2629,15 @@ jQuery.extend({
 		try {
 			// Set the correct header, if data is being sent
 			if ( s.data )
-				xml.setRequestHeader("Content-Type", s.contentType);
+				xml.setRequestheader("Content-Type", s.contentType);
 
 			// Set the If-Modified-Since header, if ifModified mode.
 			if ( s.ifModified )
-				xml.setRequestHeader("If-Modified-Since",
+				xml.setRequestheader("If-Modified-Since",
 					jQuery.lastModified[s.url] || "Thu, 01 Jan 1970 00:00:00 GMT" );
 
 			// Set header so the called script knows that it's an XMLHttpRequest
-			xml.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+			xml.setRequestheader("X-Requested-With", "XMLHttpRequest");
 		} catch(e){}
 
 		// Allow custom headers/mimetypes
@@ -2679,7 +2679,7 @@ jQuery.extend({
 					// Cache Last-Modified header, if ifModified mode.
 					var modRes;
 					try {
-						modRes = xml.getResponseHeader("Last-Modified");
+						modRes = xml.getResponseheader("Last-Modified");
 					} catch(e) {} // swallow exception thrown by FF if header is not available
 	
 					if ( s.ifModified && modRes )
@@ -2783,7 +2783,7 @@ jQuery.extend({
 	// Determines if an XMLHttpRequest returns NotModified
 	httpNotModified: function( xml, url ) {
 		try {
-			var xmlRes = xml.getResponseHeader("Last-Modified");
+			var xmlRes = xml.getResponseheader("Last-Modified");
 
 			// Firefox always returns 200. check Last-Modified date
 			return xml.status == 304 || xmlRes == jQuery.lastModified[url] ||
@@ -2793,7 +2793,7 @@ jQuery.extend({
 	},
 
 	httpData: function( r, type ) {
-		var ct = r.getResponseHeader("content-type");
+		var ct = r.getResponseheader("content-type");
 		var xml = type == "xml" || !type && ct && ct.indexOf("xml") >= 0;
 		var data = xml ? r.responseXML : r.responseText;
 

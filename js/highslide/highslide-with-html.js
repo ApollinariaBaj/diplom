@@ -2,7 +2,7 @@
 Name:    Highslide JS
 Version: 4.1.4 (April 17 2009)
 Config:  default +inline +ajax +iframe +flash
-Author:  Torstein Hønsi
+Author:  Torstein Hï¿½nsi
 Support: http://highslide.com/support
 
 Licence:
@@ -33,7 +33,7 @@ lang : {
 	loadingTitle : 'Click to cancel',
 	focusTitle : 'Click to bring to front',
 	fullExpandTitle : 'Expand to actual size (f)',
-	creditsText : '<i>CRM ÎÎÎ "Áðàéò"  </i>',
+	creditsText : '<i>CRM ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½"  </i>',
 	creditsTitle : 'Go to the Highslide JS homepage',
 	previousText : 'Previous',
 	nextText : 'Next', 
@@ -2343,7 +2343,7 @@ run : function () {
 		}
 	};
 	this.xmlHttp.open('POST', this.src, true);
-	this.xmlHttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	this.xmlHttp.setRequestheader('X-Requested-With', 'XMLHttpRequest');
 	this.xmlHttp.send('dummy=1');
 },
 

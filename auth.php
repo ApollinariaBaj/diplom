@@ -1,17 +1,15 @@
-<?php
+п»ї<?php
 session_start();
-require "../conf/dbconnect.php";
-if (isset($_POST['parol'])) {
-    $res = mysqli_query(CONNECTION, "SELECT id, is_admin FROM user WHERE login='{$_POST['login']}' AND password='{$_POST['password']}'");
-    if (mysqli_num_rows($res)) {
-        while ($prise_mas = mysqli_fetch_row($res)) {
-            $_SESSION['user']['id'] = "$prise_mas[0]";
-            $_SESSION['user']['admin'] = (bool)$prise_mas[1];
-            Header("Location: main.php");
-        }
-    } else {    //такого пользователя нет
-        echo "<center><br><br>Введены неверные логин или пароль<br><br> <span><a href='index.php'>Попробуйте еще раз</a></span> <br> или обратитесь к администратору системы<br>
-";
+require_once "services/Users.php";
+use App\Services\Users;
+if (isset($_POST['login']) && isset($_POST['password'])) {
+    if ((new Users())->authorization($_POST['login'], md5($_POST['password']))) {
+        header('Location: ' .$_SERVER['REQUEST_URI']);
+    } else {    //С‚Р°РєРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµС‚
+        echo "<center><br><br>Р’РІРµРґРµРЅС‹ РЅРµРІРµСЂРЅС‹Рµ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ<br><br> <span><a href='index.php'>РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·</a></span>
+ <br> РёР»Рё РѕР±СЂР°С‚РёС‚РµСЃСЊ Рє Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂСѓ СЃРёСЃС‚РµРјС‹<br>";
     }
+} else {
+    echo "<center><br><br>Р—Р°РїРѕР»РЅРёС‚Рµ Р»РѕРіРёРЅ Рё РїР°СЂРѕР»СЊ<br><br> <span><a href='index.php'>РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·</a></span>
+<br> РёР»Рё РѕР±СЂР°С‚РёС‚РµСЃСЊ Рє Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂСѓ СЃРёСЃС‚РµРјС‹<br>";
 }
-?>

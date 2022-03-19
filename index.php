@@ -1,6 +1,6 @@
-<?php session_start();
-if (!$_SESSION['user']) {
-    Header("Location: main.php");
+п»ї<?php session_start();
+if ($_SESSION['user']) {
+    header("Location: main.php");
 }
 ?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 
@@ -9,7 +9,7 @@ if (!$_SESSION['user']) {
 <head>
     <meta http-equiv='content-type' content='text/html; charset=windows-1251'/>
 
-    <title>Необходима авторизация</title>
+    <title>РќРµРѕР±С…РѕРґРёРјР° Р°РІС‚РѕСЂРёР·Р°С†РёСЏ</title>
 
     <link rel="stylesheet" type="text/css" href="/js/jquery-ui-1.7.2.custom.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -33,7 +33,7 @@ if (!$_SESSION['user']) {
                                 <tr>
                                     <td width="150" align="center"><img src="/image/admin.png" height="80" width="80">
                                     </td>
-                                    <td width="300" align="center"><h2>Авторизация</h2></td>
+                                    <td width="300" align="center"><h2>РђРІС‚РѕСЂРёР·Р°С†РёСЏ</h2></td>
                                     <td width="150" align="center"><img src="/image/cup.png" height="80" width="80">
                                     </td>
                                 </tr>
@@ -43,7 +43,7 @@ if (!$_SESSION['user']) {
                 </tr>
                 <tr>
                     <td bgcolor="#ffffcc" align="center">
-                        <div>Введите логин и пароль</div>
+                        <div>Р’РІРµРґРёС‚Рµ Р»РѕРіРёРЅ Рё РїР°СЂРѕР»СЊ</div>
                     </td>
                 </tr>
                 <tr>
@@ -51,20 +51,20 @@ if (!$_SESSION['user']) {
                         <form method="post" action="auth.php">
                             <table align=center>
 
-                                <td>Логин:</td>
+                                <td>Р›РѕРіРёРЅ:</td>
                                 <td><input type="text" name="login" class="text"></td>
                                 </tr>
 
                                 <tr>
-                                    <td>Пароль:</td>
+                                    <td>РџР°СЂРѕР»СЊ:</td>
                                     <td><input type="password" name="password" class="text"></td>
                                 </tr>
                                 <tr>
                                     <td colspan=2>
                                         <br>
                                         <div style="text-align: center">
-                                            <input type="submit" name="parol" width="99" height="33" border="0"
-                                                   value="Вход">
+                                            <input type="submit" width="99" height="33" border="0"
+                                                   value="Р’С…РѕРґ">
                                         </div>
                                     </td>
                                 </tr>

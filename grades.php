@@ -1,9 +1,9 @@
 <?php session_start();
 if (!$_SESSION['user']) {
-    Header("Location: index.php");
+    header("Location: index.php");
 }
 if ($_SESSION['user']['admin']) {
-    Header("Location: main.php");
+    header("Location: main.php");
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>

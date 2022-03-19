@@ -1,10 +1,15 @@
 <?php session_start();
 if (!$_SESSION['user']) {
-    Header("Location: index.php");
+    header("Location: index.php");
 }
 if (!$_SESSION['user']['admin']) {
-    Header("Location: main.php");
+    header("Location: main.php");
 }
+require_once "services/Users.php";
+
+
+use App\Services\Users;
+$users = (new Users())->getUsers();
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 
@@ -26,8 +31,10 @@ if (!$_SESSION['user']['admin']) {
 </head>
 <body>
 <div id='main'>
+    <div class='noifixpng'></div>
+    <div>
 
-
+    </div>
 </div>
 </body>
 </html>
