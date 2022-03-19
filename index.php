@@ -1,4 +1,7 @@
 <?php session_start();
+if (!$_SESSION['user']) {
+    Header("Location: main.php");
+}
 ?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 
 <html xmlns='http://www.w3.org/1999/xhtml'>
@@ -25,22 +28,13 @@
             <table align="center" cellspacing="2" cellpadding="2" border="0" width="600" bgcolor="#ABE2F0">
                 <tr>
                     <td colspan="3" align="center" class="ppp">
-                        <h2>
-                            <?php
-                            require "../conf/dbconnect.php";
-                            $namec = mysqli_query(CONNECTION, "select login from user where login!='0' limit 1");
-                            while ($sod_mas1 = mysqli_fetch_row($namec)) {
-                                $title = $sod_mas1[0];
-                                echo $title;
-                            };
-                            ?></h2>
                         <div>
                             <table width="600">
                                 <tr>
-                                    <td width="150" align="center"><img src="../image/admin.png" height="80" width="80">
+                                    <td width="150" align="center"><img src="/image/admin.png" height="80" width="80">
                                     </td>
-                                    <td width="300" align="center"><h2>Панель администратора</h2></td>
-                                    <td width="150" align="center"><img src="../image/cup.png" height="80" width="80">
+                                    <td width="300" align="center"><h2>Авторизация</h2></td>
+                                    <td width="150" align="center"><img src="/image/cup.png" height="80" width="80">
                                     </td>
                                 </tr>
                             </table>
@@ -68,7 +62,7 @@
                                 <tr>
                                     <td colspan=2>
                                         <br>
-                                        <div>
+                                        <div style="text-align: center">
                                             <input type="submit" name="parol" width="99" height="33" border="0"
                                                    value="Вход">
                                         </div>
