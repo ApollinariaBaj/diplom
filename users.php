@@ -6,7 +6,7 @@ if (!$_SESSION['user']['admin']) {
     header("Location: main.php");
 }
 require_once "services/users.php";
-
+$searchString = $_REQUEST["search"] ?? null;
 $users = (new Users())->getUsers();
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
@@ -36,7 +36,8 @@ $users = (new Users())->getUsers();
                 <form class="form-data search ajax" method="post" action="./dataAjax.php">
                     <input class="visually-hidden" type="hidden" name="act" value="search">
                     <input class="visually-hidden" type="hidden" name="type" value="user">
-                    <input type="search" name="string" class="form-control rounded" placeholder="Поиск"
+                    <input type="search" name="string" class="form-control rounded"
+                           placeholder="Поиск" <?= 'value="' . $searchString . '"' ?? ''; ?>
                            aria-label="Поиск"
                            aria-describedby="search-addon"/>
                     <button type="submit" class="btn btn-primary" id="search-addon">Поиск</button>

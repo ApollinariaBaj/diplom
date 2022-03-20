@@ -132,12 +132,9 @@ class DataAjaxRequest extends AjaxRequest
         }
 
         $searchString = $this->getRequestParam("string");
-        if (empty($searchString)) {
-            $this->setFieldError("string", "Пустая строка поиска");
-            return;
-        }
+        $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "./" . $class::PAGE . "?search={$searchString}");
+        $this->setResponse("redirect", "./" . $class::PAGE . $additionalRequest);
     }
 }
 
