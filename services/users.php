@@ -138,6 +138,19 @@ class Users
         return true;
     }
 
+    public function deleteUser(int $id): bool
+    {
+        $stmt = $this->connection->stmt_init();
+        if (($stmt->prepare("DELETE FROM user WHERE user.id = ?") === FALSE) ||
+            ($stmt->bind_param('i', $id) === FALSE)
+            || ($stmt->execute() === FALSE) || ($stmt->close() === FALSE)
+        ) {
+            return false;
+        }
+        $stmt->close();
+        return true;
+    }
+
     public function authorize(string $login, string $password): bool
     {
         if ($result = $this->connection->query(
