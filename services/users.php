@@ -1,6 +1,6 @@
 <?php
-
-namespace App\Services;
+require_once "Connection.php";
+session_start();
 
 class Users
 {
@@ -11,18 +11,19 @@ class Users
 
     public function __construct()
     {
-        require_once "Connection.php";
         $this->connection = new Connection();
     }
 
     public function getUsers()
     {
-//        $users = mysqli_query(CONNECTION, "select * from user");
-//        while ($user = mysqli_fetch_row($users)) {
-//            var_dump($user);
-//        }
-//
-//        return $user;
+        if ($result = $this->connection->query("SELECT login, is_admin FROM user")) {
+            while ($obj = $result->fetch_object()) {
+               $users[] = $obj;
+            }
+            unset($obj);
+        }
+        $result->close();
+        return $users ?? [];
     }
 
     public function addUser()
@@ -35,7 +36,7 @@ class Users
 
     }
 
-    public function authorization(string $login, string $password): bool
+    public function authorize(string $login, string $password): bool
     {
         if ($result = $this->connection->query(
             sprintf("SELECT id, is_admin FROM user WHERE login='%s' AND password='%s' limit 1",
@@ -45,12 +46,27 @@ class Users
             while ($obj = $result->fetch_object()) {
                 $_SESSION['user']['id'] = $obj->id;
                 $_SESSION['user']['admin'] = (bool)$obj->is_admin;
+                $res = true;
             }
             unset($obj);
             $result->close();
-            return true;
+            return $res ?? false;
         }
         $result->close();
+        return false;
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['user']); /* пррисваиваем нулевое значение */
+//        session_destroy();
+    }
+
+    public static function isAuthorized(): bool
+    {
+        if (!empty($_SESSION['user'])) {
+            return true;
+        }
         return false;
     }
 }

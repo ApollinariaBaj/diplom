@@ -1,10 +1,5 @@
 <?php
-
-namespace App\Services;
-
-use mysqli;
-
-class Connection extends mysqli
+class Connection extends \mysqli
 {
     const HOST_NAME = 'localhost';
     const USER_NAME = 'polinarv_1';

@@ -1,5 +1,8 @@
-﻿<?php session_start();
-if ($_SESSION['user']) {
+﻿<?require_once 'services/users.php';
+//todo не видит сессии на этой странице
+var_dump(Users::isAuthorized());
+
+if (Users::isAuthorized()) {
     header("Location: main.php");
 }
 ?><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
@@ -11,71 +14,24 @@ if ($_SESSION['user']) {
 
     <title>Необходима авторизация</title>
 
-    <link rel="stylesheet" type="text/css" href="/js/jquery-ui-1.7.2.custom.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel='stylesheet' type='text/css' href='/css/index.css'/>
-    <script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui-1.7.2.custom.min.js"></script>
-    <script type="text/javascript" src="/js/ui.datepicker-ru.js"></script>
-    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="/js/forma.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 <body>
-<div id='main'>
-    <div class='noifixpng'></div>
-    <div>
-        <div>
-            <table align="center" cellspacing="2" cellpadding="2" border="0" width="600" bgcolor="#ABE2F0">
-                <tr>
-                    <td colspan="3" align="center" class="ppp">
-                        <div>
-                            <table width="600">
-                                <tr>
-                                    <td width="150" align="center"><img src="/image/admin.png" height="80" width="80">
-                                    </td>
-                                    <td width="300" align="center"><h2>Авторизация</h2></td>
-                                    <td width="150" align="center"><img src="/image/cup.png" height="80" width="80">
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td bgcolor="#ffffcc" align="center">
-                        <div>Введите логин и пароль</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        <form method="post" action="auth.php">
-                            <table align=center>
+<div class='container text-center'>
+    <form class="form-signin ajax" method="post" action="./authorizationAjax.php">
+        <div class="main-error alert alert-error hide"></div>
 
-                                <td>Логин:</td>
-                                <td><input type="text" name="login" class="text"></td>
-                                </tr>
-
-                                <tr>
-                                    <td>Пароль:</td>
-                                    <td><input type="password" name="password" class="text"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan=2>
-                                        <br>
-                                        <div style="text-align: center">
-                                            <input type="submit" width="99" height="33" border="0"
-                                                   value="Вход">
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+        <h2 class="form-signin-heading">Авторизация</h2>
+        <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>
+        <input name="password" type="password" class="input-block-level" placeholder="Пароль">
+        <input type="hidden" name="act" value="login">
+        <button class="btn btn-large btn-primary" type="submit">Войти</button>
+    </form>
 </div>
+<script src="./js/jquery-2.0.3.min.js"></script>
+<script src="./js/ajax-form.js"></script>
 </body>
 
 </html>
