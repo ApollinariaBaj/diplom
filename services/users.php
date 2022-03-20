@@ -36,11 +36,11 @@ class Users
         return $users ?? [];
     }
 
-    public function checkExist(string $login): bool
+    public function checkExist(int $id): bool
     {
-        $login = $this->connection->real_escape_string($login);
+        $id = $this->connection->real_escape_string($id);
         if ($result = $this->connection->query(
-            "SELECT id FROM user where login='" . $login . "'")) {
+            "SELECT id FROM user where id='" . $id . "'")) {
             while ($obj = $result->fetch_object()) {
                 $res = true;
             }
@@ -51,6 +51,28 @@ class Users
         $result->close();
         return false;
     }
+
+    public function checkLoginExist(string $login, ?int $id = null): bool
+    {
+        $login = $this->connection->real_escape_string($login);
+        if ($result = $this->connection->query(
+            "SELECT id FROM user where login='" . $login . "'")) {
+            while ($obj = $result->fetch_object()) {
+                $res = true;
+                if ($id && $id == $obj->id) {
+                    $res = false;
+                } elseif (!$id) {
+                    $res = true;
+                }
+            }
+            unset($obj);
+            $result->close();
+            return $res ?? false;
+        }
+        $result->close();
+        return false;
+    }
+
     public function addUser(string $login, string $password, bool $isAdmin): bool
     {
         $stmt = $this->connection->stmt_init();
@@ -64,9 +86,56 @@ class Users
         return true;
     }
 
-    public function updateUser($id)
+    public function updateUser(int $id, ?string $login, ?string $password, bool $isAdmin)
     {
+        $query = "UPDATE user SET %s WHERE user.id =" . $this->connection->real_escape_string($id);
+        $set = '';
+        $bindParam = '';
+        $stmt = $this->connection->stmt_init();
+        if ($login) {
+            $set = "login=?";
+            $bindParam = "s";
+        }
+        if ($password) {
+            if (!empty($set)) {
+                $set .= ", ";
+            }
+            $set .= "password=?";
+            $bindParam .= "s";
+        }
+        if (!empty($set)) {
+            $set .= ", ";
+        }
+        $set .= "is_admin=?";
+        $bindParam .= "i";
 
+        if ($stmt->prepare(sprintf($query, $set)) === FALSE) {
+            return false;
+        }
+        if ($login && $password) {
+            if (($stmt->bind_param($bindParam, $login, $password, $isAdmin) === FALSE)
+                || ($stmt->execute() === FALSE) || ($stmt->close() === FALSE)) {
+                return false;
+            }
+        } elseif ($login) {
+            if (($stmt->bind_param($bindParam, $login, $isAdmin) === FALSE)
+                || ($stmt->execute() === FALSE) || ($stmt->close() === FALSE)) {
+                return false;
+            }
+        } elseif ($password) {
+            if (($stmt->bind_param($bindParam, $password, $isAdmin) === FALSE)
+                || ($stmt->execute() === FALSE) || ($stmt->close() === FALSE)) {
+                return false;
+            }
+        } else {
+            if (($stmt->bind_param($bindParam, $isAdmin) === FALSE)
+                || ($stmt->execute() === FALSE) || ($stmt->close() === FALSE)) {
+                return false;
+            }
+        }
+
+        $stmt->close();
+        return true;
     }
 
     public function authorize(string $login, string $password): bool

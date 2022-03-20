@@ -33,9 +33,8 @@ $users = (new Users())->getUsers();
                 </button>
             </div>
             <div class="input-group">
-                <form class="form-data search ajax" method="post" action="./dataAjax.php">
+                <form class="form-data search ajax" method="post" action="./userAjax.php">
                     <input class="visually-hidden" type="hidden" name="act" value="search">
-                    <input class="visually-hidden" type="hidden" name="type" value="user">
                     <input type="search" name="string" class="form-control rounded"
                            placeholder="Поиск" <?= 'value="' . $searchString . '"' ?? ''; ?>
                            aria-label="Поиск"
@@ -71,7 +70,13 @@ $users = (new Users())->getUsers();
   <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
 </svg>' ?></td>
                     <td class="text-center">
-                        <button class="btn btn-primary btn-sm" type="submit">Редактировать</button>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal"
+                                data-id="<?= $user->id; ?>"
+                                data-name="<?= $user->login; ?>"
+                                data-isadmin="<?= $user->is_admin; ?>"
+                        >
+                            Редактировать
+                        </button>
                     </td>
                     <td class="text-center">
                         <button class="btn btn-danger btn-sm" type="submit">Удалить</button>
@@ -89,11 +94,10 @@ $users = (new Users())->getUsers();
                 <h5 class="modal-title">Добавление пользователя</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="form-data modal-form ajax" method="post" action="./dataAjax.php">
+            <form class="form-data modal-form ajax" method="post" action="./userAjax.php">
                 <div class="main-error text-center"></div>
                 <div class="modal-body text-center">
                     <input class="visually-hidden" type="hidden" name="act" value="add">
-                    <input class="visually-hidden" type="hidden" name="type" value="user">
                     <div class="mb-2">
                         <p>Логин: </p>
                         <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>
@@ -115,10 +119,57 @@ $users = (new Users())->getUsers();
         </div>
     </div>
 </div>
+<div class="modal" id="updateModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Редактирование пользователя</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="form-data modal-form ajax" method="post" action="./userAjax.php">
+                <div class="main-error text-center"></div>
+                <div class="modal-body">
+                    <input class="visually-hidden" type="hidden" name="act" value="update">
+                    <input class="visually-hidden" type="hidden" name="id">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col mb-2 text-end">
+                                <p>Логин: </p>
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2 text-end">
+                                <p>Новый пароль: </p>
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <input name="password" type="password" class="input-block-level" placeholder="Пароль">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2 text-center">
+                                <label class="form-check-label" for="isAdmin2">Администратор: </label>
+                                <input class="form-check-input" type="checkbox" name="admin" value="admin"
+                                       id="isAdmin2"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-right">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="./js/jquery-2.0.3.min.js"></script>
 <script src="./js/ajax-data.js"></script>
+<script src="./js/modal.js"></script>
 </body>
 </html>

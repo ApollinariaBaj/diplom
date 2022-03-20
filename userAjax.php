@@ -8,20 +8,13 @@ if (!empty($_COOKIE['sid'])) {
 }
 session_start();
 
-class DataAjaxRequest extends AjaxRequest
+class UserAjaxRequest extends AjaxRequest
 {
     public $actions = [
         "add" => "add",
         "delete" => "delete",
         "update" => "update",
         "search" => "search",
-    ];
-
-    public $type = [
-        "user" => Users::class,
-        "student" => "student",
-        "subject" => "subject",
-        "group" => "group",
     ];
 
     public function add()
@@ -31,12 +24,6 @@ class DataAjaxRequest extends AjaxRequest
             http_response_code(405);
             header("Allow: POST");
             $this->setFieldError("main", "Method Not Allowed");
-            return;
-        }
-        if (isset($this->type[$this->getRequestParam("type")])) {
-            $class = new $this->type[$this->getRequestParam("type")];
-        } else {
-            $this->setFieldError("type", "Некорректный запрос");
             return;
         }
         $username = $this->getRequestParam("login");
@@ -52,7 +39,7 @@ class DataAjaxRequest extends AjaxRequest
         $isAdmin = (bool)$this->getRequestParam("admin");
 
         $user = new Users();
-        if ($user->checkExist($username)) {
+        if ($user->checkLoginExist($username)) {
             $this->setFieldError("exist", "Пользователь с таким логином уже существует!");
             return;
         }
@@ -62,7 +49,7 @@ class DataAjaxRequest extends AjaxRequest
             return;
         }
         $this->status = "ok";
-        $this->setResponse("redirect", "./main.php");
+        $this->setResponse("redirect", "./" . $user::PAGE);
     }
 
     public function delete()
@@ -92,27 +79,26 @@ class DataAjaxRequest extends AjaxRequest
             return;
         }
         setcookie("sid", "");
-        $username = $this->getRequestParam("login");
-        $password = $this->getRequestParam("password");
-
-        if (empty($username)) {
-            $this->setFieldError("login", "Введите логин");
-            return;
-        }
-
-        if (empty($password)) {
-            $this->setFieldError("password", "Введите пароль");
-            return;
-        }
+        $id = $this->getRequestParam("id");
+        $username = $this->getRequestParam("login") ?? null;
+        $password = $this->getRequestParam("password") ?? null;
+        $isAdmin = (bool)$this->getRequestParam("admin");
         $user = new Users();
-        $auth_result = $user->authorize($username, md5($password));
-        if (!$auth_result) {
-            $this->setFieldError("password", "Неправильный логин или пароль");
+        if (!$user->checkExist($id)) {
+            $this->setFieldError("exist", "Такого пользователя не существует!");
+            return;
+        }
+        if ($username && $user->checkLoginExist($username, $id)) {
+            $this->setFieldError("exist", "Пользователь с таким логином уже существует!");
+            return;
+        }
+        $res = $user->updateUser($id, $username, md5($password), $isAdmin);
+        if (!$res) {
+            $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
         }
         $this->status = "ok";
-        $this->setResponse("redirect", "./main.php");
-        $this->message = sprintf("Здравстуйте, %s! Добро пожаловать в систему.", $username);
+        $this->setResponse("redirect", "./" . $user::PAGE);
     }
 
     public function search()
@@ -124,19 +110,13 @@ class DataAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        if (isset($this->type[$this->getRequestParam("type")])) {
-            $class = new $this->type[$this->getRequestParam("type")];
-        } else {
-            $this->setFieldError("type", "Некорректный запрос");
-            return;
-        }
-
+        $user = new Users();
         $searchString = $this->getRequestParam("string");
         $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "./" . $class::PAGE . $additionalRequest);
+        $this->setResponse("redirect", "./" . $user::PAGE . $additionalRequest);
     }
 }
 
-$ajaxRequest = new DataAjaxRequest($_REQUEST);
+$ajaxRequest = new UserAjaxRequest($_REQUEST);
 $ajaxRequest->showResponse();
