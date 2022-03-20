@@ -179,6 +179,7 @@ class Users
 
     public static function isAuthorized(): bool
     {
+        session_start();
         if (!empty($_SESSION['user'])) {
             return true;
         }

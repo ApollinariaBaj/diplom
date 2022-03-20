@@ -1,7 +1,5 @@
-﻿<?require_once 'services/users.php';
+<?require_once 'services/users.php';
 //todo не видит сессии на этой странице
-var_dump(Users::isAuthorized());
-
 if (Users::isAuthorized()) {
     header("Location: main.php");
 }
@@ -10,7 +8,7 @@ if (Users::isAuthorized()) {
 <html xmlns='http://www.w3.org/1999/xhtml'>
 
 <head>
-    <meta http-equiv='content-type' content='text/html; charset=windows-1251'/>
+    <meta http-equiv='content-type' content='text/html; charset=utf-8'/>
     <link rel="shortcut icon" href="https://e.muiv.ru/theme/image.php/_s/vitte/theme/1632305883/favicon"/>
     <title>Необходима авторизация</title>
     <!-- CSS only -->

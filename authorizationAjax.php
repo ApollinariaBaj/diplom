@@ -24,7 +24,7 @@ class AuthorizationAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        setcookie("sid", "");
+        session_start();
         $username = $this->getRequestParam("login");
         $password = $this->getRequestParam("password");
 

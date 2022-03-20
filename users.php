@@ -1,4 +1,4 @@
-﻿<?php session_start();
+<?php session_start();
 if (!$_SESSION['user']) {
     header("Location: index.php");
 }
@@ -14,7 +14,7 @@ $users = (new Users())->getUsers();
 <html xmlns='http://www.w3.org/1999/xhtml'>
 
 <head>
-    <meta http-equiv='content-type' content='text/html; charset=windows-1251'/>
+    <meta http-equiv='content-type' content='text/html; charset=utf-8'/>
     <link rel="shortcut icon" href="https://e.muiv.ru/theme/image.php/_s/vitte/theme/1632305883/favicon"/>
     <title>Пользователи</title>
     <!-- CSS only -->

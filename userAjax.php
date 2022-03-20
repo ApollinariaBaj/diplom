@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once "services/users.php";
 require_once "services/AjaxRequest.php";
 
