@@ -40,7 +40,7 @@ class AuthorizationAjaxRequest extends AjaxRequest
         $user = new Users();
         $auth_result = $user->authorize($username, md5($password));
         if (!$auth_result) {
-            $this->setFieldError("password", "Неправильный логин или пароль");
+            $this->setFieldError("notFound", "Неправильный логин или пароль");
             return;
         }
         $this->status = "ok";

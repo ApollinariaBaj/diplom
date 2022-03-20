@@ -36,9 +36,32 @@ class Users
         return $users ?? [];
     }
 
-    public function addUser()
+    public function checkExist(string $login): bool
     {
-
+        $login = $this->connection->real_escape_string($login);
+        if ($result = $this->connection->query(
+            "SELECT id FROM user where login='" . $login . "'")) {
+            while ($obj = $result->fetch_object()) {
+                $res = true;
+            }
+            unset($obj);
+            $result->close();
+            return $res ?? false;
+        }
+        $result->close();
+        return false;
+    }
+    public function addUser(string $login, string $password, bool $isAdmin): bool
+    {
+        $stmt = $this->connection->stmt_init();
+        if (($stmt->prepare("INSERT INTO user (login, password, is_admin) VALUES (?, ?, ?)") === FALSE) ||
+            ($stmt->bind_param('ssi', $login, $password, $isAdmin) === FALSE)
+            || ($stmt->execute() === FALSE) || ($stmt->close() === FALSE)
+        ) {
+            return false;
+        }
+        $stmt->close();
+        return true;
     }
 
     public function updateUser($id)
@@ -50,8 +73,8 @@ class Users
     {
         if ($result = $this->connection->query(
             sprintf("SELECT id, is_admin FROM user WHERE login='%s' AND password='%s' limit 1",
-                $login,
-                $password)
+                $this->connection->real_escape_string($login),
+                $this->connection->real_escape_string($password))
         )) {
             while ($obj = $result->fetch_object()) {
                 $_SESSION['user']['id'] = $obj->id;

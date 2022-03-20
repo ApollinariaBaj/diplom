@@ -89,6 +89,7 @@ $users = (new Users())->getUsers();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form class="form-data modal-form ajax" method="post" action="./dataAjax.php">
+                <div class="main-error text-center"></div>
                 <div class="modal-body text-center">
                     <input class="visually-hidden" type="hidden" name="act" value="add">
                     <input class="visually-hidden" type="hidden" name="type" value="user">
@@ -102,7 +103,7 @@ $users = (new Users())->getUsers();
                     </div>
                     <div class="mb-2">
                         <label class="form-check-label" for="isAdmin">Администратор: </label>
-                        <input class="form-check-input" type="checkbox" name="admin" value="" id="isAdmin"/>
+                        <input class="form-check-input" type="checkbox" name="admin" value="admin" id="isAdmin"/>
                     </div>
                 </div>
                 <div class="modal-footer text-right">

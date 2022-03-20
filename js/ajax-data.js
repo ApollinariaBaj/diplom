@@ -1,4 +1,4 @@
-!(function($) {
+!(function ($) {
     'use strict';
 
     var script = {};
@@ -9,16 +9,16 @@
         ajaxSettings: {
             $loaderEl: $('#loader'),
 
-            beforeSend: function() {
+            beforeSend: function () {
                 this.$loaderEl.show();
             },
 
-            complete: function() {
+            complete: function () {
                 this.$loaderEl.hide();
             }
         },
 
-        init: function() {
+        init: function () {
             $.ajaxSetup(this.ajaxSettings);
         },
 
@@ -60,14 +60,14 @@
     script.ajaxform = {
         $forms: null,
 
-        init: function(selector) {
+        init: function (selector) {
             this.$forms = $(selector);
             this.$forms.attr('novalidate', 'novalidate');
             this.initHandler();
         },
 
-        initHandler: function() {
-            this.$forms.submit(function() {
+        initHandler: function () {
+            this.$forms.submit(function () {
                 var $_this = $(this);
                 var result = script.ajaxform.validate($_this);
 
@@ -79,7 +79,7 @@
             });
         },
 
-        callback: function($form, data) {
+        callback: function ($form, data) {
             var action = getURLParam('act', $form.attr('action'));
 
             if (!action || action === ';') {
@@ -94,18 +94,18 @@
             }
         },
 
-        validate: function($form) {
+        validate: function ($form) {
             var $fields = $form.find(':input'),
                 isValid = true,
                 $e;
 
-            $fields.each(function(i, e) {
+            $fields.each(function (i, e) {
                 $(e).removeClass('error-message');
             });
 
             $form.find('.error-message').remove();
 
-            $fields.each(function(i, e) {
+            $fields.each(function (i, e) {
                 if (e.hasAttribute('required')) {
                     $e = $(e);
                     if (!$e.val().trim()) {
@@ -118,7 +118,7 @@
             return isValid;
         },
 
-        go: function($form) {
+        go: function ($form) {
             var method = $form.attr('method') || 'GET';
             var action = $form.attr('action') || '.';
 
@@ -135,13 +135,13 @@
 
             $formButtons.attr("disabled", "disabled");
 
-            ajaxSettings.complete = function() {
+            ajaxSettings.complete = function () {
                 script.ajax.ajaxSettings.$loaderEl.hide();
                 $formInputs.removeAttr('readonly');
                 $formButtons.removeAttr('disabled');
             };
 
-            ajaxSettings.success = function(response) {
+            ajaxSettings.success = function (response) {
                 var data;
                 if (typeof response === 'object') {
                     // mime type application/json responsed
@@ -160,7 +160,7 @@
             $.ajax(ajaxSettings);
         },
 
-        validateByAjax: function($form, data) {
+        validateByAjax: function ($form, data) {
             if (data.status === 'ok') {
                 if (data.message !== undefined && data.message !== null) {
                     // window.alert(data.message);
@@ -173,7 +173,12 @@
                     }
                 }
             } else if (data.status === 'err') {
-                var $mainErrorContainer = $( "#main-error" );
+                if ($form.find('.main-error').length > 0) {
+                    var $mainErrorContainer = $form.find('.main-error')
+                } else {
+                    var $mainErrorContainer = $("#main-error");
+                }
+
                 if (data.code === 'main') {
                     if ($mainErrorContainer !== null) {
                         $mainErrorContainer.html('<div class="alert alert-danger" role="alert">' + data.message + '</div>');
@@ -236,12 +241,12 @@
         return translated;
     }
 
-    script.init = function() {
+    script.init = function () {
         this.ajaxform.init('form.form-data');
         this.ajax.init();
     };
 
-    $(document).ready(function($) {
+    $(document).ready(function ($) {
         script.init();
     });
 })(jQuery);

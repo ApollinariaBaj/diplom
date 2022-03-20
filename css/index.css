@@ -53,10 +53,11 @@ input, select, textarea, button {
 .custom-table {
     background-color: #fff;
     border: 1px solid #e5e5e5;
+    margin-bottom: 0;
 }
 
 .pre-scrollable {
-    max-height: 75vh;
+    max-height: 90vh;
     width: 100%;
     overflow: auto;
 }

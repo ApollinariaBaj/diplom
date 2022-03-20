@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once "services/users.php";
 require_once "services/AjaxRequest.php";
 
@@ -39,15 +39,30 @@ class DataAjaxRequest extends AjaxRequest
             $this->setFieldError("type", "Некорректный запрос");
             return;
         }
+        $username = $this->getRequestParam("login");
+        if (empty($username)) {
+            $this->setFieldError("login", "Введите логин");
+            return;
+        }
+        $password = $this->getRequestParam("password");
+        if (empty($password)) {
+            $this->setFieldError("password", "Введите пароль");
+            return;
+        }
+        $isAdmin = (bool)$this->getRequestParam("admin");
+
         $user = new Users();
-        $auth_result = $user->authorize($username, md5($password));
-        if (!$auth_result) {
-            $this->setFieldError("password", "Неправильный логин или пароль");
+        if ($user->checkExist($username)) {
+            $this->setFieldError("exist", "Пользователь с таким логином уже существует!");
+            return;
+        }
+        $res = $user->addUser($username, md5($password), $isAdmin);
+        if (!$res) {
+            $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
         }
         $this->status = "ok";
         $this->setResponse("redirect", "./main.php");
-        $this->message = sprintf("Здравстуйте, %s! Добро пожаловать в систему.", $username);
     }
 
     public function delete()
@@ -121,7 +136,6 @@ class DataAjaxRequest extends AjaxRequest
             $this->setFieldError("string", "Пустая строка поиска");
             return;
         }
-        $searchString = addslashes($searchString);
         $this->status = "ok";
         $this->setResponse("redirect", "./" . $class::PAGE . "?search={$searchString}");
     }
