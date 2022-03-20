@@ -61,7 +61,6 @@ class UserAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        setcookie("sid", "");
         $id = $this->getRequestParam("id");
         $user = new Users();
         if (!$user->checkExist($id)) {
@@ -86,7 +85,6 @@ class UserAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        setcookie("sid", "");
         $id = $this->getRequestParam("id");
         $username = $this->getRequestParam("login") ?? null;
         $password = $this->getRequestParam("password") ?? null;
