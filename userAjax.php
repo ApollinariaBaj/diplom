@@ -62,11 +62,19 @@ class UserAjaxRequest extends AjaxRequest
             return;
         }
         setcookie("sid", "");
+        $id = $this->getRequestParam("id");
         $user = new Users();
-        $user->logout();
-
-        $this->setResponse("redirect", ".");
+        if (!$user->checkExist($id)) {
+            $this->setFieldError("exist", "Такого пользователя не существует!");
+            return;
+        }
+        $res = $user->deleteUser($id);
+        if (!$res) {
+            $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
+            return;
+        }
         $this->status = "ok";
+        $this->setResponse("redirect", "./" . $user::PAGE);
     }
 
     public function update()
