@@ -61,15 +61,24 @@ input, select, textarea, button {
     overflow: auto;
 }
 
-.form-data {
+.search {
     display: inline-flex;
 }
 
-.form-data .form-data-heading,
-.form-data .checkbox {
+.search .form-data-heading,
+.search .checkbox {
     margin-bottom: 10px;
 }
 
-.form-data input {
+.search input {
     display: inline;
+}
+
+.modal-form {
+    display: block;
+}
+.modal-form p,
+.modal-form input,
+.modal-form label {
+    display: inline-block;
 }

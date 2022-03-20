@@ -33,17 +33,10 @@ class DataAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        setcookie("sid", "");
-        $username = $this->getRequestParam("login");
-        $password = $this->getRequestParam("password");
-
-        if (empty($username)) {
-            $this->setFieldError("login", "Введите логин");
-            return;
-        }
-
-        if (empty($password)) {
-            $this->setFieldError("password", "Введите пароль");
+        if (isset($this->type[$this->getRequestParam("type")])) {
+            $class = new $this->type[$this->getRequestParam("type")];
+        } else {
+            $this->setFieldError("type", "Некорректный запрос");
             return;
         }
         $user = new Users();

@@ -28,10 +28,12 @@ $users = (new Users())->getUsers();
     <div class="container mb-2 mt-2">
         <div class="btn-toolbar justify-content-between" role="toolbar">
             <div class="btn-group mr-2" role="group">
-                <button type="button" class="btn btn-primary">Добавить пользователя</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                    Добавить пользователя
+                </button>
             </div>
             <div class="input-group">
-                <form class="form-data ajax" method="post" action="./dataAjax.php">
+                <form class="form-data search ajax" method="post" action="./dataAjax.php">
                     <input class="visually-hidden" type="hidden" name="act" value="search">
                     <input class="visually-hidden" type="hidden" name="type" value="user">
                     <input type="search" name="string" class="form-control rounded" placeholder="Поиск"
@@ -79,6 +81,41 @@ $users = (new Users())->getUsers();
         </table>
     </div>
 </div>
+<div class="modal" id="addModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавление пользователя</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="form-data modal-form ajax" method="post" action="./dataAjax.php">
+                <div class="modal-body text-center">
+                    <input class="visually-hidden" type="hidden" name="act" value="add">
+                    <input class="visually-hidden" type="hidden" name="type" value="user">
+                    <div class="mb-2">
+                        <p>Логин: </p>
+                        <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>
+                    </div>
+                    <div class="mb-2">
+                        <p>Пароль: </p>
+                        <input name="password" type="password" class="input-block-level" placeholder="Пароль">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-check-label" for="isAdmin">Администратор: </label>
+                        <input class="form-check-input" type="checkbox" name="admin" value="" id="isAdmin"/>
+                    </div>
+                </div>
+                <div class="modal-footer text-right">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 <script src="./js/jquery-2.0.3.min.js"></script>
 <script src="./js/ajax-data.js"></script>
 </body>
