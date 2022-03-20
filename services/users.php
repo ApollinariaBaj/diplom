@@ -4,6 +4,7 @@ session_start();
 
 class Users
 {
+    const PAGE = 'main.php';
     /**
      * @var Connection
      */
@@ -14,11 +15,20 @@ class Users
         $this->connection = new Connection();
     }
 
-    public function getUsers()
+    public function getUsers(): array
     {
-        if ($result = $this->connection->query("SELECT login, is_admin FROM user")) {
+        if (isset($_REQUEST["search"])) {
+            $search = $this->connection->real_escape_string($_REQUEST["search"]);
+            if ($result = $this->connection->query(
+                "SELECT id, login, is_admin FROM user where login LIKE '%" . $search . "%'",)) {
+                while ($obj = $result->fetch_object()) {
+                    $users[] = $obj;
+                }
+                unset($obj);
+            }
+        } elseif ($result = $this->connection->query("SELECT id, login, is_admin FROM user")) {
             while ($obj = $result->fetch_object()) {
-               $users[] = $obj;
+                $users[] = $obj;
             }
             unset($obj);
         }

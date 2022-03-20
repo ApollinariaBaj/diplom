@@ -15,7 +15,7 @@ $users = (new Users())->getUsers();
 
 <head>
     <meta http-equiv='content-type' content='text/html; charset=windows-1251'/>
-
+    <link rel="shortcut icon" href="https://e.muiv.ru/theme/image.php/_s/vitte/theme/1632305883/favicon"/>
     <title>Пользователи</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -24,15 +24,21 @@ $users = (new Users())->getUsers();
 </head>
 <body>
 <div class='container-fluid'>
+    <div id="main-error" class="text-center"></div>
     <div class="container mb-2 mt-2">
         <div class="btn-toolbar justify-content-between" role="toolbar">
             <div class="btn-group mr-2" role="group">
                 <button type="button" class="btn btn-primary">Добавить пользователя</button>
             </div>
             <div class="input-group">
-                <input type="search" class="form-control rounded" placeholder="Поиск" aria-label="Поиск"
-                       aria-describedby="search-addon"/>
-                <button type="button" class="btn btn-primary" id="search-addon">Поиск</button>
+                <form class="form-data ajax" method="post" action="./dataAjax.php">
+                    <input class="visually-hidden" type="hidden" name="act" value="search">
+                    <input class="visually-hidden" type="hidden" name="type" value="user">
+                    <input type="search" name="string" class="form-control rounded" placeholder="Поиск"
+                           aria-label="Поиск"
+                           aria-describedby="search-addon"/>
+                    <button type="submit" class="btn btn-primary" id="search-addon">Поиск</button>
+                </form>
             </div>
         </div>
     </div>
@@ -62,10 +68,10 @@ $users = (new Users())->getUsers();
   <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
 </svg>' ?></td>
                     <td class="text-center">
-                        <button class="btn btn-primary" type="submit">Редактировать</button>
+                        <button class="btn btn-primary btn-sm" type="submit">Редактировать</button>
                     </td>
                     <td class="text-center">
-                        <button class="btn btn-danger" type="submit">Удалить</button>
+                        <button class="btn btn-danger btn-sm" type="submit">Удалить</button>
                     </td>
                 </tr>
             <? } ?>
@@ -74,5 +80,6 @@ $users = (new Users())->getUsers();
     </div>
 </div>
 <script src="./js/jquery-2.0.3.min.js"></script>
+<script src="./js/ajax-data.js"></script>
 </body>
 </html>

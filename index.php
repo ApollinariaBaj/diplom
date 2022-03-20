@@ -11,16 +11,17 @@ if (Users::isAuthorized()) {
 
 <head>
     <meta http-equiv='content-type' content='text/html; charset=windows-1251'/>
-
+    <link rel="shortcut icon" href="https://e.muiv.ru/theme/image.php/_s/vitte/theme/1632305883/favicon"/>
     <title>Необходима авторизация</title>
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' href='/css/index.css'/>
 </head>
 <body>
 <div class='container text-center'>
     <form class="form-signin ajax" method="post" action="./authorizationAjax.php">
-        <div class="main-error alert alert-error hide"></div>
+        <div class="main-error"></div>
 
         <h2 class="form-signin-heading">Авторизация</h2>
         <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>

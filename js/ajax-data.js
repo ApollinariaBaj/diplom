@@ -23,7 +23,7 @@
         },
 
         callbacks: {
-            login: function ($form, data) {
+            add: function ($form, data) {
                 if (data.status === 'ok') {
                     if (data.data && data.data.redirect) {
                         window.location.href = data.data.redirect;
@@ -31,7 +31,23 @@
                 }
             },
 
-            logout: function ($form, data) {
+            delete: function ($form, data) {
+                if (data.status === 'ok') {
+                    if (data.data && data.data.redirect) {
+                        window.location.href = data.data.redirect;
+                    }
+                }
+            },
+
+            update: function ($form, data) {
+                if (data.status === 'ok') {
+                    if (data.data && data.data.redirect) {
+                        window.location.href = data.data.redirect;
+                    }
+                }
+            },
+
+            search: function ($form, data) {
                 if (data.status === 'ok') {
                     if (data.data && data.data.redirect) {
                         window.location.href = data.data.redirect;
@@ -157,7 +173,7 @@
                     }
                 }
             } else if (data.status === 'err') {
-                var $mainErrorContainer = $form.find('.main-error');
+                var $mainErrorContainer = $( "#main-error" );
                 if (data.code === 'main') {
                     if ($mainErrorContainer !== null) {
                         $mainErrorContainer.html('<div class="alert alert-danger" role="alert">' + data.message + '</div>');
@@ -221,7 +237,7 @@
     }
 
     script.init = function() {
-        this.ajaxform.init('form.form-signin');
+        this.ajaxform.init('form.form-data');
         this.ajax.init();
     };
 

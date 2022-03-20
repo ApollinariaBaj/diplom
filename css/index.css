@@ -60,3 +60,16 @@ input, select, textarea, button {
     width: 100%;
     overflow: auto;
 }
+
+.form-data {
+    display: inline-flex;
+}
+
+.form-data .form-data-heading,
+.form-data .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-data input {
+    display: inline;
+}
