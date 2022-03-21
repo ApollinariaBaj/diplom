@@ -48,8 +48,11 @@ class UserAjaxRequest extends AjaxRequest
             $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
         }
+        $searchString = $this->getRequestParam("search");
+        $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "../" . $user::PAGE);
+        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
+        $this->message = sprintf("Пользователь %s добавлен.", $username);
     }
 
     public function delete()
@@ -72,8 +75,11 @@ class UserAjaxRequest extends AjaxRequest
             $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
         }
+        $searchString = $this->getRequestParam("search");
+        $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "../" . $user::PAGE);
+        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
+        $this->message = "Пользователь удалён.";
     }
 
     public function update()
@@ -103,8 +109,11 @@ class UserAjaxRequest extends AjaxRequest
             $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
         }
+        $searchString = $this->getRequestParam("search");
+        $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "../" . $user::PAGE);
+        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
+        $this->message = sprintf("Пользователь %s обновлен.", $username);
     }
 
     public function search()

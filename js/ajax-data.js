@@ -163,7 +163,7 @@
         validateByAjax: function ($form, data) {
             if (data.status === 'ok') {
                 if (data.message !== undefined && data.message !== null) {
-                    // window.alert(data.message);
+                    window.alert(data.message);
                 }
                 if (data.redirect === true) {
                     if (data.url !== undefined && data.url !== null) {

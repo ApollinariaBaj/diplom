@@ -57,7 +57,7 @@ input, select, textarea, button {
 }
 
 .pre-scrollable {
-    max-height: 90vh;
+    max-height: 75vh;
     width: 100%;
     overflow: auto;
 }

@@ -106,6 +106,7 @@ $users = (new Users())->getUsers();
                 <div class="main-error text-center"></div>
                 <div class="modal-body text-center">
                     <input class="visually-hidden" type="hidden" name="act" value="add">
+                    <input class="visually-hidden" type="hidden" name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
                     <div class="mb-2">
                         <p>Логин: </p>
                         <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>
@@ -138,6 +139,7 @@ $users = (new Users())->getUsers();
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="update">
+                    <input class="visually-hidden" type="hidden" name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
                     <input class="visually-hidden" type="hidden" name="id">
                     <div class="container">
                         <div class="row">
@@ -184,6 +186,7 @@ $users = (new Users())->getUsers();
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="delete">
+                    <input class="visually-hidden" type="hidden" name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
                     <input class="visually-hidden" type="hidden" name="id">
                     <div class="alert alert-warning d-flex align-items-center" role="alert">
                         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
