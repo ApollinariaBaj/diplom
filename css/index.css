@@ -2,7 +2,7 @@
 body {
     background: url(/image/fon.gif);
     color: #353f45;
-    font-size: 12px;
+    font-size: 13px;
     font-family: Tahoma, sans;
 }
 
@@ -82,4 +82,8 @@ input, select, textarea, button {
 .modal-form input,
 .modal-form label {
     display: inline-block;
+}
+
+.nav-link {
+    font-size: 15px;
 }

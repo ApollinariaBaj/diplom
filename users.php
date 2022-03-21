@@ -5,6 +5,7 @@ if (!Users::isAuthorized()) {
 } elseif (!Users::isAdmin()) {
     header("Location: main.php");
 }
+$active = "/main.php";
 $searchString = $_REQUEST["search"] ?? null;
 $users = (new Users())->getUsers();
 ?>
