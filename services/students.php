@@ -27,10 +27,10 @@ class Students
                     if (!empty($like)) {
                         $like .= " AND ";
                     }
-                    $like .= "(student.name LIKE '%{$string}%' 
-                    XOR father_name LIKE '%{$string}%' 
-                    XOR sur_name LIKE '%{$string}%' 
-                    XOR `group`.name LIKE '%{$string}%')";
+                    $like .= "(lower(student.name) LIKE '%{$string}%' 
+                    XOR lower(father_name) LIKE '%{$string}%' 
+                    XOR lower(sur_name) LIKE '%{$string}%' 
+                    XOR lower(`group`.name) LIKE '%{$string}%')";
 
                 }
             }

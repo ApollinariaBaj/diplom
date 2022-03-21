@@ -66,3 +66,29 @@ if (updateStudentModal) {
         modalBodySelect.value = group;
     })
 }
+
+const updateGroupModal = document.getElementById('updateGroupModal');
+if (updateGroupModal) {
+    updateGroupModal.addEventListener('show.bs.modal', (e) => {
+        // Button that triggered the modal
+        const button = e.relatedTarget;
+        // Extract info from data-mdb-* attributes
+        const id = button.getAttribute('data-id')
+        const name = button.getAttribute('data-name')
+        const type = button.getAttribute('data-type')
+        const course = button.getAttribute('data-course')
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        const modalBodyInputId = updateGroupModal.querySelector('.modal-body input[name="id"]');
+        const modalBodyInputName = updateGroupModal.querySelector('.modal-body input[name="name"]');
+        const modalBodyInputCourse = updateGroupModal.querySelector('.modal-body input[name="course"]');
+        const modalBodyInputType = updateGroupModal.querySelector('.modal-body select');
+
+        modalBodyInputId.value = id;
+        modalBodyInputName.value = name;
+        modalBodyInputCourse.value = course;
+        modalBodyInputType.value = type;
+    })
+}

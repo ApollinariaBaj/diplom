@@ -1,14 +1,16 @@
 <?php session_start();
 require_once 'services/users.php';
+require_once 'services/students.php';
 require_once 'services/groups.php';
 if (!Users::isAuthorized()) {
     header("Location: main.php");
 } elseif (!Users::isAdmin()) {
     header("Location: main.php");
 }
-$active = "/groups.php";
+$active = "/teachers.php";
 $searchString = $_REQUEST["search"] ?? null;
-$groups = (new Groups())->getGroups();
+$students = (new Students())->getStudents();
+$groups = (new Groups())->getGroupsNames();
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 
@@ -32,11 +34,11 @@ $groups = (new Groups())->getGroups();
         <div class="btn-toolbar justify-content-between" role="toolbar">
             <div class="btn-group mr-2" role="group">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                    Добавить группу
+                    Добавить студента
                 </button>
             </div>
             <div class="input-group">
-                <form class="form-data search ajax" method="post" action="./ajax/groupAjax.php">
+                <form class="form-data search ajax" method="post" action="./ajax/studentAjax.php">
                     <input class="visually-hidden" type="hidden" name="act" value="search">
                     <input type="search" name="string" class="form-control rounded"
                            placeholder="Поиск" <?= 'value="' . $searchString . '"' ?? ''; ?>
@@ -54,25 +56,24 @@ $groups = (new Groups())->getGroups();
             <thead>
             <tr>
                 <th scope="col" class="th-sm text-center">#</th>
-                <th scope="col" class="th-sm text-center">Название</th>
-                <th scope="col" class="th-sm text-center">Уровень образования</th>
-                <th scope="col" class="th-sm text-center">Курс</th>
+                <th scope="col" class="th-sm text-center">ФИО</th>
+                <th scope="col" class="th-sm text-center">Группа</th>
                 <th colspan="2" scope="col" class="th-sm text-center">Действия</th>
             </tr>
             </thead>
             <tbody>
-            <? foreach ($groups as $key => $group) { ?>
+            <? foreach ($students as $key => $student) { ?>
                 <tr>
                     <th scope="row" class="text-center"><?= $key + 1; ?></th>
-                    <td class="text-center"><?= $group->name; ?></td>
-                    <td class="text-center"><?= $group->type; ?></td>
-                    <td class="text-center"><?= $group->course; ?></td>
+                    <td class="text-center"><?= "{$student->sur_name} {$student->name} {$student->father_name}"; ?></td>
+                    <td class="text-center"><?= $student->group; ?></td>
                     <td class="text-center">
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateGroupModal"
-                                data-id="<?= $group->id; ?>"
-                                data-name="<?= $group->name; ?>"
-                                data-type="<?= $group->type; ?>"
-                                data-course="<?= $group->course; ?>"
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateStudentModal"
+                                data-id="<?= $student->id; ?>"
+                                data-name="<?= $student->name; ?>"
+                                data-sur-name="<?= $student->sur_name; ?>"
+                                data-father-name="<?= $student->father_name; ?>"
+                                data-group-id="<?= $student->group_id; ?>"
                         >
                             Редактировать
                         </button>
@@ -80,8 +81,8 @@ $groups = (new Groups())->getGroups();
                     <td class="text-center">
                         <button class="btn btn-danger btn-sm" type="submit" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal"
-                                data-id="<?= $group->id; ?>"
-                                data-name="Удаление группы <?= $group->name; ?>"
+                                data-id="<?= $student->id; ?>"
+                                data-name="Удаление студента <?= "{$student->sur_name} {$student->name} {$student->father_name}" ?>"
                         >
                             Удалить
                         </button>
@@ -96,10 +97,10 @@ $groups = (new Groups())->getGroups();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Добавление группы</h5>
+                <h5 class="modal-title">Добавление студента</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="form-data modal-form ajax" method="post" action="./ajax/groupAjax.php">
+            <form class="form-data modal-form ajax" method="post" action="./ajax/studentAjax.php">
                 <div class="main-error text-center"></div>
                 <div class="modal-body text-center">
                     <input class="visually-hidden" type="hidden" name="act" value="add">
@@ -109,34 +110,40 @@ $groups = (new Groups())->getGroups();
                     <div class="container">
                         <div class="row">
                             <div class="col mb-2 text-end">
-                                <p>Название: </p>
+                                <p>Фамилия: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="name" type="text" class="input-block-level" placeholder="Название"
+                                <input name="surName" type="text" class="input-block-level" placeholder="Фамилия"
                                        autofocus>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mb-2 text-end">
-                                <label class="form-select-label" for="group">Уровень образования: </label>
+                                <p>Имя: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="type" name="type">
-                                    <option value="" selected>Выберите уровень</option>
-                                    <option value="Среднее специальное">Среднее специальное</option>
-                                    <option value="Бакалавриат">Бакалавриат</option>
-                                    <option value="Магистратура">Магистратура</option>
-                                    <option value="Аспирантура">Аспирантура</option>
-                                </select>
+                                <input name="name" type="text" class="input-block-level" placeholder="Имя">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mb-2 text-end">
-                                <p>Курс: </p>
+                                <p>Отчество: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="course" type="number" class="input-block-level" id="replyNumber" min="1"
-                                       max="6" step="1" data-bind="value:replyNumber" placeholder="Курс">
+                                <input name="fatherName" type="text" class="input-block-level" placeholder="Отчество">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2 text-end">
+                                <label class="form-select-label" for="group">Группа: </label>
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <select class="form-select form-select-sm " aria-label="group" name="group">
+                                    <option value="" selected>Выберите группу</option>
+                                    <? foreach ($groups as $group) { ?>
+                                        <option value="<?= $group->id?>"><?=$group->name?></option>
+                                    <? } ?>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -149,14 +156,14 @@ $groups = (new Groups())->getGroups();
         </div>
     </div>
 </div>
-<div class="modal" id="updateGroupModal" tabindex="-1">
+<div class="modal" id="updateStudentModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Редактирование группы</h5>
+                <h5 class="modal-title">Редактирование студента</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="form-data modal-form ajax" method="post" action="./ajax/groupAjax.php">
+            <form class="form-data modal-form ajax" method="post" action="./ajax/studentAjax.php">
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="update">
@@ -166,34 +173,40 @@ $groups = (new Groups())->getGroups();
                     <div class="container">
                         <div class="row">
                             <div class="col mb-2 text-end">
-                                <p>Название: </p>
+                                <p>Фамилия: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="name" type="text" class="input-block-level" placeholder="Название"
+                                <input name="surName" type="text" class="input-block-level" placeholder="Фамилия"
                                        autofocus>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mb-2 text-end">
-                                <label class="form-select-label" for="group">Уровень образования: </label>
+                                <p>Имя: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="type" name="type">
-                                    <option value="" selected>Выберите уровень</option>
-                                    <option value="Среднее специальное">Среднее специальное</option>
-                                    <option value="Бакалавриат">Бакалавриат</option>
-                                    <option value="Магистратура">Магистратура</option>
-                                    <option value="Аспирантура">Аспирантура</option>
-                                </select>
+                                <input name="name" type="text" class="input-block-level" placeholder="Имя">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col mb-2 text-end">
-                                <p>Курс: </p>
+                                <p>Отчество: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="course" type="number" class="input-block-level" id="replyNumber" min="1"
-                                       max="6" step="1" data-bind="value:replyNumber" placeholder="Курс">
+                                <input name="fatherName" type="text" class="input-block-level" placeholder="Отчество">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2 text-end">
+                                <label class="form-select-label" for="group">Группа: </label>
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <select class="form-select form-select-sm " aria-label="group" name="group">
+                                    <option value="">Выберите группу</option>
+                                    <? foreach ($groups as $group) { ?>
+                                        <option value="<?= $group->id?>"><?=$group->name?></option>
+                                    <? } ?>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -210,10 +223,10 @@ $groups = (new Groups())->getGroups();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Удаление группы</h5>
+                <h5 class="modal-title">Удаление студента</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="form-data modal-form ajax" method="post" action="./ajax/groupAjax.php">
+            <form class="form-data modal-form ajax" method="post" action="./ajax/studentAjax.php">
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="delete">
@@ -230,7 +243,7 @@ $groups = (new Groups())->getGroups();
                             <use xlink:href="#exclamation-triangle-fill"/>
                         </svg>
                         <div>
-                            Вы уверены, что хотите удалить группу?
+                            Вы уверены, что хотите удалить пользователя?
                         </div>
                     </div>
                 </div>

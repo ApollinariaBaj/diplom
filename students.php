@@ -243,7 +243,7 @@ $groups = (new Groups())->getGroupsNames();
                             <use xlink:href="#exclamation-triangle-fill"/>
                         </svg>
                         <div>
-                            Вы уверены, что хотите удалить пользователя?
+                            Вы уверены, что хотите удалить студента?
                         </div>
                     </div>
                 </div>
