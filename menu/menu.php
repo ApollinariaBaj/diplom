@@ -3,6 +3,7 @@ require_once 'services/users.php';
 const ADMIN = [
     '/main.php' => 'Пользователи',
     '/students.php' => 'Студенты',
+    '/teachers.php' => 'Преподаватели',
     '/groups.php' => 'Группы',
     '/subjects.php' => 'Предметы',
     '/exit.php' => 'Выход <svg class="bi bi-box-arrow-right" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">

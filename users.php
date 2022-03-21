@@ -84,7 +84,7 @@ $users = (new Users())->getUsers();
                         <button class="btn btn-danger btn-sm" type="submit" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal"
                                 data-id="<?= $user->id; ?>"
-                                data-name="<?= $user->login; ?>"
+                                data-name="Удаление пользователя <?= $user->login; ?>"
                         >
                             Удалить
                         </button>

@@ -80,6 +80,7 @@ input, select, textarea, button {
 }
 .modal-form p,
 .modal-form input,
+.modal-form select,
 .modal-form label {
     display: inline-block;
 }

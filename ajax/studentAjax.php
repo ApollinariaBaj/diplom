@@ -1,14 +1,9 @@
 <?php
-require_once "../services/users.php";
+require_once "../services/students.php";
 require_once "../services/AjaxRequest.php";
 
-if (!empty($_COOKIE['sid'])) {
-    // check session id in cookies
-    session_id($_COOKIE['sid']);
-}
-session_start();
 
-class UserAjaxRequest extends AjaxRequest
+class StudentAjaxRequest extends AjaxRequest
 {
     public $actions = [
         "add" => "add",
@@ -26,24 +21,21 @@ class UserAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        $username = $this->getRequestParam("login");
-        if (empty($username)) {
-            $this->setFieldError("login", "Введите логин");
+        $surName = $this->getRequestParam("surName");
+        if (empty($surName)) {
+            $this->setFieldError("surName", "Введите фамилию");
             return;
         }
-        $password = $this->getRequestParam("password");
-        if (empty($password)) {
-            $this->setFieldError("password", "Введите пароль");
+        $name = $this->getRequestParam("name");
+        if (empty($name)) {
+            $this->setFieldError("name", "Введите имя");
             return;
         }
-        $isAdmin = (bool)$this->getRequestParam("admin");
+        $fatherName = $this->getRequestParam("fatherName") ?: null;
+        $group = $this->getRequestParam("group") ?: null;
+        $student = new Students();
+        $res = $student->addStudent($surName, $name, $fatherName, $group);
 
-        $user = new Users();
-        if ($user->checkLoginExist($username)) {
-            $this->setFieldError("exist", "Пользователь с таким логином уже существует!");
-            return;
-        }
-        $res = $user->addUser($username, md5($password), $isAdmin);
         if (!$res) {
             $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
@@ -51,8 +43,8 @@ class UserAjaxRequest extends AjaxRequest
         $searchString = $this->getRequestParam("search");
         $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
-        $this->message = sprintf("Пользователь %s добавлен.", $username);
+        $this->setResponse("redirect", "../" . $student::PAGE . $additionalRequest);
+        $this->message = sprintf("Студент %s добавлен.", "{$surName} {$name} {$fatherName}");
     }
 
     public function delete()
@@ -65,12 +57,12 @@ class UserAjaxRequest extends AjaxRequest
             return;
         }
         $id = $this->getRequestParam("id");
-        $user = new Users();
-        if (!$user->checkExist($id)) {
-            $this->setFieldError("exist", "Такого пользователя не существует!");
+        $students = new Students();
+        if (!$students->checkExist($id)) {
+            $this->setFieldError("exist", "Такого студента не существует!");
             return;
         }
-        $res = $user->deleteUser($id);
+        $res = $students->deleteStudent($id);
         if (!$res) {
             $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
@@ -78,8 +70,8 @@ class UserAjaxRequest extends AjaxRequest
         $searchString = $this->getRequestParam("search");
         $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
-        $this->message = "Пользователь удалён.";
+        $this->setResponse("redirect", "../" . $students::PAGE . $additionalRequest);
+        $this->message = "Студент удалён.";
     }
 
     public function update()
@@ -92,19 +84,16 @@ class UserAjaxRequest extends AjaxRequest
             return;
         }
         $id = $this->getRequestParam("id");
-        $username = $this->getRequestParam("login") ?: null;
-        $password = $this->getRequestParam("password") ?: null;
-        $isAdmin = (bool)$this->getRequestParam("admin");
-        $user = new Users();
-        if (!$user->checkExist($id)) {
-            $this->setFieldError("exist", "Такого пользователя не существует!");
+        $surName = $this->getRequestParam("surName") ?: null;
+        $name = $this->getRequestParam("name") ?: null;
+        $fatherName = $this->getRequestParam("fatherName") ?: null;
+        $group = $this->getRequestParam("group") ?: null;
+        $student = new Students();
+        if (!$student->checkExist($id)) {
+            $this->setFieldError("exist", "Такого студента не существует!");
             return;
         }
-        if ($username && $user->checkLoginExist($username, $id)) {
-            $this->setFieldError("exist", "Пользователь с таким логином уже существует!");
-            return;
-        }
-        $res = $user->updateUser($id, $username, md5($password), $isAdmin);
+        $res = $student->updateStudent($id, $surName, $name, $fatherName, $group);
         if (!$res) {
             $this->setFieldError("common", "Что-то пошло не так, попробуйте позднее");
             return;
@@ -112,8 +101,8 @@ class UserAjaxRequest extends AjaxRequest
         $searchString = $this->getRequestParam("search");
         $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
-        $this->message = sprintf("Пользователь %s обновлен.", $username);
+        $this->setResponse("redirect", "../" . $student::PAGE . $additionalRequest);
+        $this->message = sprintf("Студент %s обновлен.", "{$surName} {$name} {$fatherName}");
     }
 
     public function search()
@@ -125,13 +114,13 @@ class UserAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        $user = new Users();
+        $students = new Students();
         $searchString = $this->getRequestParam("string");
         $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
+        $this->setResponse("redirect", "../" . $students::PAGE . $additionalRequest);
     }
 }
 
-$ajaxRequest = new UserAjaxRequest($_REQUEST);
+$ajaxRequest = new StudentAjaxRequest($_REQUEST);
 $ajaxRequest->showResponse();

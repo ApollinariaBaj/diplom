@@ -18,9 +18,9 @@ class Users
     public function getUsers(): array
     {
         if (isset($_REQUEST["search"])) {
-            $search = $this->connection->real_escape_string($_REQUEST["search"]);
+            $search = strtolower($this->connection->real_escape_string($_REQUEST["search"]));
             if ($result = $this->connection->query(
-                "SELECT id, login, is_admin FROM user where login LIKE '%" . $search . "%'",)) {
+                "SELECT id, login, is_admin FROM user where lower(login) LIKE '%" . $search . "%'")) {
                 while ($obj = $result->fetch_object()) {
                     $users[] = $obj;
                 }
@@ -86,7 +86,7 @@ class Users
         return true;
     }
 
-    public function updateUser(int $id, ?string $login, ?string $password, bool $isAdmin)
+    public function updateUser(int $id, ?string $login, ?string $password, bool $isAdmin): bool
     {
         $query = "UPDATE user SET %s WHERE user.id =" . $this->connection->real_escape_string($id);
         $set = '';
