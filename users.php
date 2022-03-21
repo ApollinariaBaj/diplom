@@ -1,11 +1,10 @@
 <?php session_start();
-if (!$_SESSION['user']) {
-    header("Location: index.php");
-}
-if (!$_SESSION['user']['admin']) {
+require_once 'services/users.php';
+if (!Users::isAuthorized()) {
+    header("Location: main.php");
+} elseif (!Users::isAdmin()) {
     header("Location: main.php");
 }
-require_once "services/users.php";
 $searchString = $_REQUEST["search"] ?? null;
 $users = (new Users())->getUsers();
 ?>
@@ -23,6 +22,8 @@ $users = (new Users())->getUsers();
     <link rel='stylesheet' type='text/css' href='/css/index.css'/>
 </head>
 <body>
+<? require_once "./menu/menu.php";?>
+
 <div class='container-fluid'>
     <div id="main-error" class="text-center"></div>
     <div class="container mb-2 mt-2">
@@ -33,7 +34,7 @@ $users = (new Users())->getUsers();
                 </button>
             </div>
             <div class="input-group">
-                <form class="form-data search ajax" method="post" action="./userAjax.php">
+                <form class="form-data search ajax" method="post" action="./ajax/userAjax.php">
                     <input class="visually-hidden" type="hidden" name="act" value="search">
                     <input type="search" name="string" class="form-control rounded"
                            placeholder="Поиск" <?= 'value="' . $searchString . '"' ?? ''; ?>
@@ -100,7 +101,7 @@ $users = (new Users())->getUsers();
                 <h5 class="modal-title">Добавление пользователя</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="form-data modal-form ajax" method="post" action="./userAjax.php">
+            <form class="form-data modal-form ajax" method="post" action="./ajax/userAjax.php">
                 <div class="main-error text-center"></div>
                 <div class="modal-body text-center">
                     <input class="visually-hidden" type="hidden" name="act" value="add">
@@ -132,7 +133,7 @@ $users = (new Users())->getUsers();
                 <h5 class="modal-title">Редактирование пользователя</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="form-data modal-form ajax" method="post" action="./userAjax.php">
+            <form class="form-data modal-form ajax" method="post" action="./ajax/userAjax.php">
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="update">
@@ -178,7 +179,7 @@ $users = (new Users())->getUsers();
                 <h5 class="modal-title">Удаление пользователя</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="form-data modal-form ajax" method="post" action="./userAjax.php">
+            <form class="form-data modal-form ajax" method="post" action="./ajax/userAjax.php">
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="delete">

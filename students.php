@@ -1,8 +1,8 @@
 <?php session_start();
-if (!$_SESSION['user']) {
-    header("Location: index.php");
-}
-if (!$_SESSION['user']['admin']) {
+require_once 'services/users.php';
+if (!Users::isAuthorized()) {
+    header("Location: main.php");
+} elseif (!Users::isAdmin()) {
     header("Location: main.php");
 }
 ?>

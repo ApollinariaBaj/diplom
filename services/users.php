@@ -171,16 +171,26 @@ class Users
         return false;
     }
 
-    public function logout()
+    public static function logout(): bool
     {
         unset($_SESSION['user']); /* пррисваиваем нулевое значение */
 //        session_destroy();
+        return true;
     }
 
     public static function isAuthorized(): bool
     {
         session_start();
         if (!empty($_SESSION['user'])) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function isAdmin(): bool
+    {
+        session_start();
+        if ($_SESSION['user']['admin']) {
             return true;
         }
         return false;

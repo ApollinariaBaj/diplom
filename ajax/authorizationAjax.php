@@ -1,6 +1,6 @@
 <?php
-require_once "services/users.php";
-require_once "services/AjaxRequest.php";
+require_once "../services/users.php";
+require_once "../services/AjaxRequest.php";
 
 if (!empty($_COOKIE['sid'])) {
     // check session id in cookies
@@ -44,8 +44,7 @@ class AuthorizationAjaxRequest extends AjaxRequest
             return;
         }
         $this->status = "ok";
-        $this->setResponse("redirect", "./main.php");
-        $this->message = sprintf("Здравстуйте, %s! Добро пожаловать в систему.", $username);
+        $this->setResponse("redirect", "../main.php");
     }
 
     public function logout()
@@ -57,12 +56,9 @@ class AuthorizationAjaxRequest extends AjaxRequest
             $this->setFieldError("main", "Method Not Allowed");
             return;
         }
-        setcookie("sid", "");
-        $user = new Users();
-        $user->logout();
-
-        $this->setResponse("redirect", ".");
+        Users::logout();
         $this->status = "ok";
+        $this->setResponse("redirect", "../index.php");
     }
 }
 

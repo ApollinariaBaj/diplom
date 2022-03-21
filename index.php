@@ -1,5 +1,4 @@
 <?require_once 'services/users.php';
-//todo не видит сессии на этой странице
 if (Users::isAuthorized()) {
     header("Location: main.php");
 }

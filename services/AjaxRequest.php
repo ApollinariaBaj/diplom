@@ -15,6 +15,7 @@ class AjaxRequest
     public $callback;
     public $response;
     public $json;
+    public $action;
 
     public function __construct($request)
     {

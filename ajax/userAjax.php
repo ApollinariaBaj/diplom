@@ -1,6 +1,6 @@
 <?php
-require_once "services/users.php";
-require_once "services/AjaxRequest.php";
+require_once "../services/users.php";
+require_once "../services/AjaxRequest.php";
 
 if (!empty($_COOKIE['sid'])) {
     // check session id in cookies
@@ -49,7 +49,7 @@ class UserAjaxRequest extends AjaxRequest
             return;
         }
         $this->status = "ok";
-        $this->setResponse("redirect", "./" . $user::PAGE);
+        $this->setResponse("redirect", "../" . $user::PAGE);
     }
 
     public function delete()
@@ -73,7 +73,7 @@ class UserAjaxRequest extends AjaxRequest
             return;
         }
         $this->status = "ok";
-        $this->setResponse("redirect", "./" . $user::PAGE);
+        $this->setResponse("redirect", "../" . $user::PAGE);
     }
 
     public function update()
@@ -104,7 +104,7 @@ class UserAjaxRequest extends AjaxRequest
             return;
         }
         $this->status = "ok";
-        $this->setResponse("redirect", "./" . $user::PAGE);
+        $this->setResponse("redirect", "../" . $user::PAGE);
     }
 
     public function search()
@@ -120,7 +120,7 @@ class UserAjaxRequest extends AjaxRequest
         $searchString = $this->getRequestParam("string");
         $additionalRequest = (!empty($searchString)) ? "?search={$searchString}" : "";
         $this->status = "ok";
-        $this->setResponse("redirect", "./" . $user::PAGE . $additionalRequest);
+        $this->setResponse("redirect", "../" . $user::PAGE . $additionalRequest);
     }
 }
 

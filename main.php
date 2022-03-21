@@ -1,11 +1,9 @@
 <?php session_start();
-if (!$_SESSION['user']) {
+require_once 'services/users.php';
+if (!Users::isAuthorized()) {
     header("Location: index.php");
-}
-if ($_SESSION['user']['admin']) {
+} elseif (Users::isAdmin()) {
     require_once "users.php";
-}
-
-if (!$_SESSION['user']['admin']) {
+} else {
     require_once "lessons.php";
 }
