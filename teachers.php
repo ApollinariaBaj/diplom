@@ -138,7 +138,7 @@ $groups = (new Groups())->getGroupsNames();
                                 <label class="form-select-label" for="group">Группа: </label>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="group" name="group">
+                                <select class="form-select  " aria-label="group" name="group">
                                     <option value="" selected>Выберите группу</option>
                                     <? foreach ($groups as $group) { ?>
                                         <option value="<?= $group->id?>"><?=$group->name?></option>
@@ -201,7 +201,7 @@ $groups = (new Groups())->getGroupsNames();
                                 <label class="form-select-label" for="group">Группа: </label>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="group" name="group">
+                                <select class="form-select  " aria-label="group" name="group">
                                     <option value="">Выберите группу</option>
                                     <? foreach ($groups as $group) { ?>
                                         <option value="<?= $group->id?>"><?=$group->name?></option>

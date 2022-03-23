@@ -23,15 +23,9 @@ if (updateModal) {
 
 const deleteModal = document.getElementById('deleteModal');
 deleteModal.addEventListener('show.bs.modal', (e) => {
-    // Button that triggered the modal
     const button = e.relatedTarget;
-    // Extract info from data-mdb-* attributes
     const id = button.getAttribute('data-id')
     const name = button.getAttribute('data-name')
-    // If necessary, you could initiate an AJAX request here
-    // and then do the updating in a callback.
-    //
-    // Update the modal's content.
     const modalBodyInputId = deleteModal.querySelector('.modal-body input[name="id"]');
     const modalTitle = deleteModal.querySelector('.modal-title');
     modalBodyInputId.value = id;
@@ -41,18 +35,12 @@ deleteModal.addEventListener('show.bs.modal', (e) => {
 const updateStudentModal = document.getElementById('updateStudentModal');
 if (updateStudentModal) {
     updateStudentModal.addEventListener('show.bs.modal', (e) => {
-        // Button that triggered the modal
         const button = e.relatedTarget;
-        // Extract info from data-mdb-* attributes
         const id = button.getAttribute('data-id')
         const surName = button.getAttribute('data-sur-name')
         const name = button.getAttribute('data-name')
         const fatherName = button.getAttribute('data-father-name')
         const group = button.getAttribute('data-group-id')
-        // If necessary, you could initiate an AJAX request here
-        // and then do the updating in a callback.
-        //
-        // Update the modal's content.
         const modalBodyInputId = updateStudentModal.querySelector('.modal-body input[name="id"]');
         const modalBodyInputSurName = updateStudentModal.querySelector('.modal-body input[name="surName"]');
         const modalBodyInputName = updateStudentModal.querySelector('.modal-body input[name="name"]');
@@ -70,25 +58,38 @@ if (updateStudentModal) {
 const updateGroupModal = document.getElementById('updateGroupModal');
 if (updateGroupModal) {
     updateGroupModal.addEventListener('show.bs.modal', (e) => {
-        // Button that triggered the modal
         const button = e.relatedTarget;
-        // Extract info from data-mdb-* attributes
         const id = button.getAttribute('data-id')
         const name = button.getAttribute('data-name')
         const type = button.getAttribute('data-type')
         const course = button.getAttribute('data-course')
-        // If necessary, you could initiate an AJAX request here
-        // and then do the updating in a callback.
-        //
-        // Update the modal's content.
         const modalBodyInputId = updateGroupModal.querySelector('.modal-body input[name="id"]');
         const modalBodyInputName = updateGroupModal.querySelector('.modal-body input[name="name"]');
         const modalBodyInputCourse = updateGroupModal.querySelector('.modal-body input[name="course"]');
-        const modalBodyInputType = updateGroupModal.querySelector('.modal-body select');
+        const modalBodySelect = updateGroupModal.querySelector('.modal-body select');
 
         modalBodyInputId.value = id;
         modalBodyInputName.value = name;
         modalBodyInputCourse.value = course;
-        modalBodyInputType.value = type;
+        modalBodySelect.value = type;
+    })
+}
+
+const updateSubjectModal = document.getElementById('updateSubjectModal');
+if (updateSubjectModal) {
+    updateSubjectModal.addEventListener('show.bs.modal', (e) => {
+        const button = e.relatedTarget;
+        const id = button.getAttribute('data-id')
+        const name = button.getAttribute('data-name')
+        const teachers = button.getAttribute('data-teachers')
+
+        const modalBodyInputId = updateSubjectModal.querySelector('.modal-body input[name="id"]');
+        const modalBodyInputName = updateSubjectModal.querySelector('.modal-body input[name="name"]');
+
+        modalBodyInputId.value = id;
+        modalBodyInputName.value = name;
+
+        $('#teachers2').selectpicker('val', teachers.split(",")).change();
+        $('#teachers2').selectpicker('refresh')
     })
 }

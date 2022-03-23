@@ -17,7 +17,7 @@ class Groups
 
     public function getGroupsNames(): array
     {
-        if ($result = $this->connection->query("SELECT id, name FROM `group`")) {
+        if ($result = $this->connection->query("SELECT id, name FROM `group` order by name")) {
             while ($obj = $result->fetch_object()) {
                 $groups[] = $obj;
             }
@@ -48,13 +48,13 @@ class Groups
                 }
             }
             if ($result = $this->connection->query(
-                "SELECT * FROM `group` where " . $like)) {
+                "SELECT * FROM `group` where " . $like ."  order by name")) {
                 while ($obj = $result->fetch_object()) {
                     $groups[] = $obj;
                 }
                 unset($obj);
             }
-        } elseif ($result = $this->connection->query("SELECT * FROM `group`")) {
+        } elseif ($result = $this->connection->query("SELECT * FROM `group` order by name")) {
             while ($obj = $result->fetch_object()) {
                 $groups[] = $obj;
             }

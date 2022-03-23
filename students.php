@@ -109,36 +109,36 @@ $groups = (new Groups())->getGroupsNames();
 
                     <div class="container">
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Фамилия: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="surName" type="text" class="input-block-level" placeholder="Фамилия"
+                                <input name="surName" type="text" class="input-block-level form-control" placeholder="Фамилия"
                                        autofocus>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Имя: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="name" type="text" class="input-block-level" placeholder="Имя">
+                                <input name="name" type="text" class="input-block-level form-control" placeholder="Имя">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Отчество: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="fatherName" type="text" class="input-block-level" placeholder="Отчество">
+                                <input name="fatherName" type="text" class="input-block-level form-control" placeholder="Отчество">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <label class="form-select-label" for="group">Группа: </label>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="group" name="group">
+                                <select class="form-select  " aria-label="group" id="group" name="group">
                                     <option value="" selected>Выберите группу</option>
                                     <? foreach ($groups as $group) { ?>
                                         <option value="<?= $group->id?>"><?=$group->name?></option>
@@ -172,36 +172,36 @@ $groups = (new Groups())->getGroupsNames();
                     <input class="visually-hidden" type="hidden" name="id">
                     <div class="container">
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Фамилия: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="surName" type="text" class="input-block-level" placeholder="Фамилия"
+                                <input name="surName" type="text" class="input-block-level form-control" placeholder="Фамилия"
                                        autofocus>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Имя: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="name" type="text" class="input-block-level" placeholder="Имя">
+                                <input name="name" type="text" class="input-block-level form-control" placeholder="Имя">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Отчество: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="fatherName" type="text" class="input-block-level" placeholder="Отчество">
+                                <input name="fatherName" type="text" class="input-block-level form-control" placeholder="Отчество">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
-                                <label class="form-select-label" for="group">Группа: </label>
+                            <div class="col-lg-3 mb-2 text-end">
+                                <label class="form-select-label" for="group2">Группа: </label>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="group" name="group">
+                                <select class="form-select  " aria-label="group" id="group2" name="group">
                                     <option value="">Выберите группу</option>
                                     <? foreach ($groups as $group) { ?>
                                         <option value="<?= $group->id?>"><?=$group->name?></option>

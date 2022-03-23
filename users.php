@@ -23,7 +23,7 @@ $users = (new Users())->getUsers();
     <link rel='stylesheet' type='text/css' href='/css/index.css'/>
 </head>
 <body>
-<? require_once "./menu/menu.php";?>
+<? require_once "./menu/menu.php"; ?>
 
 <div class='container-fluid'>
     <div id="main-error" class="text-center"></div>
@@ -106,18 +106,36 @@ $users = (new Users())->getUsers();
                 <div class="main-error text-center"></div>
                 <div class="modal-body text-center">
                     <input class="visually-hidden" type="hidden" name="act" value="add">
-                    <input class="visually-hidden" type="hidden" name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
-                    <div class="mb-2">
-                        <p>Логин: </p>
-                        <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>
-                    </div>
-                    <div class="mb-2">
-                        <p>Пароль: </p>
-                        <input name="password" type="password" class="input-block-level" placeholder="Пароль">
-                    </div>
-                    <div class="mb-2">
-                        <label class="form-check-label" for="isAdmin">Администратор: </label>
-                        <input class="form-check-input" type="checkbox" name="admin" value="admin" id="isAdmin"/>
+                    <input class="visually-hidden" type="hidden"
+                           name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 mb-2 text-end">
+                                <p>Логин: </p>
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <input name="login" type="text" class="input-block-level form-control"
+                                       placeholder="Логин" autofocus>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 mb-2 text-end">
+                                <p>Новый пароль: </p>
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <input name="password" type="password" class="input-block-level form-control"
+                                       placeholder="Пароль">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 mb-2 text-end">
+                                <label class="form-check-label" for="isAdmin2">Администратор: </label>
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <input class="form-check-input form-control" type="checkbox" name="admin" value="admin"
+                                       id="isAdmin2"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer text-right">
@@ -139,29 +157,34 @@ $users = (new Users())->getUsers();
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="update">
-                    <input class="visually-hidden" type="hidden" name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
+                    <input class="visually-hidden" type="hidden"
+                           name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
                     <input class="visually-hidden" type="hidden" name="id">
                     <div class="container">
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Логин: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="login" type="text" class="input-block-level" placeholder="Логин" autofocus>
+                                <input name="login" type="text" class="input-block-level form-control"
+                                       placeholder="Логин" autofocus>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Новый пароль: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="password" type="password" class="input-block-level" placeholder="Пароль">
+                                <input name="password" type="password" class="input-block-level form-control"
+                                       placeholder="Пароль">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-center">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <label class="form-check-label" for="isAdmin2">Администратор: </label>
-                                <input class="form-check-input" type="checkbox" name="admin" value="admin"
+                            </div>
+                            <div class="col mb-2 text-start">
+                                <input class="form-check-input form-control" type="checkbox" name="admin" value="admin"
                                        id="isAdmin2"/>
                             </div>
                         </div>
@@ -186,7 +209,8 @@ $users = (new Users())->getUsers();
                 <div class="main-error text-center"></div>
                 <div class="modal-body">
                     <input class="visually-hidden" type="hidden" name="act" value="delete">
-                    <input class="visually-hidden" type="hidden" name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
+                    <input class="visually-hidden" type="hidden"
+                           name="search" <?= 'value="' . $searchString . '"' ?? ''; ?>>
                     <input class="visually-hidden" type="hidden" name="id">
                     <div class="alert alert-warning d-flex align-items-center" role="alert">
                         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">

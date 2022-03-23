@@ -23,6 +23,7 @@ input, select, textarea, button {
     font-size: 1em;
     color: #353f45;
 }
+
 .form-signin {
     max-width: 300px;
     padding: 19px 29px 29px;
@@ -78,6 +79,7 @@ input, select, textarea, button {
 .modal-form {
     display: block;
 }
+
 .modal-form p,
 .modal-form input,
 .modal-form select,
@@ -88,3 +90,13 @@ input, select, textarea, button {
 .nav-link {
     font-size: 15px;
 }
+
+.bootstrap-select>.dropdown-toggle {
+    width: auto;
+    max-width: 476px;
+}
+@media (min-width: 576px)
+{}.modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }

@@ -108,20 +108,21 @@ $groups = (new Groups())->getGroups();
 
                     <div class="container">
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Название: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="name" type="text" class="input-block-level" placeholder="Название"
+                                <input name="name" type="text" class="input-block-level form-control"
+                                       placeholder="Название"
                                        autofocus>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
-                                <label class="form-select-label" for="group">Уровень образования: </label>
+                            <div class="col-lg-3 mb-2 text-end">
+                                <label class="form-select-label" for="type">Уровень образования: </label>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="type" name="type">
+                                <select class="form-select  " aria-label="type" id="type" name="type">
                                     <option value="" selected>Выберите уровень</option>
                                     <option value="Среднее специальное">Среднее специальное</option>
                                     <option value="Бакалавриат">Бакалавриат</option>
@@ -131,12 +132,13 @@ $groups = (new Groups())->getGroups();
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Курс: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="course" type="number" class="input-block-level" id="replyNumber" min="1"
-                                       max="6" step="1" data-bind="value:replyNumber" placeholder="Курс">
+                                <input name="course" type="number" class="input-block-level form-control"
+                                       maxlength="1" size="1"
+                                       id="replyNumber" min="1" max="6" step="1" data-bind="value:replyNumber">
                             </div>
                         </div>
                     </div>
@@ -165,20 +167,21 @@ $groups = (new Groups())->getGroups();
                     <input class="visually-hidden" type="hidden" name="id">
                     <div class="container">
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Название: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="name" type="text" class="input-block-level" placeholder="Название"
+                                <input name="name" type="text" class="input-block-level form-control"
+                                       placeholder="Название"
                                        autofocus>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
-                                <label class="form-select-label" for="group">Уровень образования: </label>
+                            <div class="col-lg-3 mb-2 text-end">
+                                <label class="form-select-label" for="type2">Уровень образования: </label>
                             </div>
                             <div class="col mb-2 text-start">
-                                <select class="form-select form-select-sm " aria-label="type" name="type">
+                                <select class="form-select" aria-label="type" id="type2" name="type">
                                     <option value="" selected>Выберите уровень</option>
                                     <option value="Среднее специальное">Среднее специальное</option>
                                     <option value="Бакалавриат">Бакалавриат</option>
@@ -188,12 +191,13 @@ $groups = (new Groups())->getGroups();
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col mb-2 text-end">
+                            <div class="col-lg-3 mb-2 text-end">
                                 <p>Курс: </p>
                             </div>
                             <div class="col mb-2 text-start">
-                                <input name="course" type="number" class="input-block-level" id="replyNumber" min="1"
-                                       max="6" step="1" data-bind="value:replyNumber" placeholder="Курс">
+                                <input name="course" type="number" class="input-block-level form-control"
+                                       id="replyNumber2" maxlength="1" size="1"
+                                       min="1" max="6" step="1" data-bind="value:replyNumber2">
                             </div>
                         </div>
                     </div>

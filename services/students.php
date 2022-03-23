@@ -38,7 +38,7 @@ class Students
                 "SELECT student.*, `group`.name as `group` FROM student
                     LEFT JOIN `group`
                     ON  student.group_id = `group`.id 
-                    where " . $like)) {
+                    where " . $like ." order by sur_name")) {
                 while ($obj = $result->fetch_object()) {
                     $students[] = $obj;
                 }
@@ -46,7 +46,7 @@ class Students
             }
         } elseif ($result = $this->connection->query("SELECT student.*, `group`.name as `group` FROM student
                     LEFT JOIN `group`
-                    ON  student.group_id = `group`.id")) {
+                    ON  student.group_id = `group`.id order by sur_name")) {
             while ($obj = $result->fetch_object()) {
                 $students[] = $obj;
             }

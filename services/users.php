@@ -20,13 +20,13 @@ class Users
         if (isset($_REQUEST["search"])) {
             $search = strtolower($this->connection->real_escape_string($_REQUEST["search"]));
             if ($result = $this->connection->query(
-                "SELECT id, login, is_admin FROM user where lower(login) LIKE '%" . $search . "%'")) {
+                "SELECT id, login, is_admin FROM user where lower(login) LIKE '%" . $search . "%' order by login")) {
                 while ($obj = $result->fetch_object()) {
                     $users[] = $obj;
                 }
                 unset($obj);
             }
-        } elseif ($result = $this->connection->query("SELECT id, login, is_admin FROM user")) {
+        } elseif ($result = $this->connection->query("SELECT id, login, is_admin FROM user order by login")) {
             while ($obj = $result->fetch_object()) {
                 $users[] = $obj;
             }
